@@ -1,0 +1,38 @@
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+# Директории виртуальных окружений
+venv/
+env/
+.venv/
+.env/
+# Файлы настроек IDE
+.idea/
+.vscode/
+# Сборка и дистрибуция
+build/
+dist/
+*.egg-info/
+
+# Файлы ОС
+.DS_Store
+Thumbs.db
+# Файлы настроек среды разработки
+.settings/
+*.sublime-project
+*.sublime-workspace
+# Файлы конфигурации Python
+*.cfg
+*.ini
+# Файлы тестов
+.coverage
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+# Файлы Jupyter Notebook
+.ipynb_checkpoints/
+.xml/
+.iml/
+.idea/

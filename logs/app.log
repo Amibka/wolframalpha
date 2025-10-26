@@ -1,0 +1,1098 @@
+2025-10-26 00:47:09 | INFO     | wolfram_pyqt | Вызов solve_equation('x**2 = 0')
+2025-10-26 00:47:09 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [0]
+2025-10-26 00:48:01 | INFO     | wolfram_pyqt | Вызов derivative('x**2')
+2025-10-26 00:48:01 | INFO     | wolfram_pyqt | derivative успешно выполнена. Результат: 2*x
+2025-10-26 00:48:22 | INFO     | wolfram_pyqt | Вызов solve_equation('solv x**2')
+2025-10-26 00:48:22 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('solv' )Symbol ('x' )**Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('solv' )Symbol ('x' )**Integer (2 )
+                    ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 25, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 00:50:46 | INFO     | wolfram_pyqt | Вызов solve_equation('solv x**2')
+2025-10-26 00:50:46 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('solv' )Symbol ('x' )**Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('solv' )Symbol ('x' )**Integer (2 )
+                    ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 25, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 00:51:32 | INFO     | wolfram_pyqt | Вызов solve_equation('solv x**2')
+2025-10-26 00:51:32 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('solv' )Symbol ('x' )**Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('solv' )Symbol ('x' )**Integer (2 )
+                    ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 25, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 00:52:21 | INFO     | wolfram_pyqt | Вызов get_text('solv x**2')
+2025-10-26 00:52:21 | INFO     | wolfram_pyqt | Вызов solve_equation('solv x**2')
+2025-10-26 00:52:21 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('solv' )Symbol ('x' )**Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('solv' )Symbol ('x' )**Integer (2 )
+                    ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 25, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 00:52:21 | ERROR    | wolfram_pyqt | Ошибка в get_text: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('solv' )Symbol ('x' )**Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('solv' )Symbol ('x' )**Integer (2 )
+                    ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\parser.py", line 24, in get_text
+    solutions = solve_equation(expression)
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 25, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 00:54:24 | INFO     | wolfram_pyqt | Вызов get_text('solv x**2')
+2025-10-26 00:54:24 | INFO     | wolfram_pyqt | Вызов solve_equation('solv x**2')
+2025-10-26 00:54:24 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('solv' )Symbol ('x' )**Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('solv' )Symbol ('x' )**Integer (2 )
+                    ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 25, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 00:54:24 | ERROR    | wolfram_pyqt | Ошибка в get_text: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('solv' )Symbol ('x' )**Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('solv' )Symbol ('x' )**Integer (2 )
+                    ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\parser.py", line 29, in get_text
+    solutions = solve_equation(expression)
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 25, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 00:58:25 | INFO     | wolfram_pyqt | Вызов get_text('solv x**2')
+2025-10-26 00:58:25 | INFO     | wolfram_pyqt | Вызов solve_equation('solv x**2')
+2025-10-26 00:58:25 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('solv' )Symbol ('x' )**Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('solv' )Symbol ('x' )**Integer (2 )
+                    ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 24, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 00:58:25 | ERROR    | wolfram_pyqt | Ошибка в get_text: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('solv' )Symbol ('x' )**Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('solv' )Symbol ('x' )**Integer (2 )
+                    ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\parser.py", line 28, in get_text
+    solutions = solve_equation(expression)
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 24, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'solv x**2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 00:58:56 | INFO     | wolfram_pyqt | Вызов get_text('solv x**2')
+2025-10-26 00:58:56 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Неизвестное действие: solve
+2025-10-26 01:01:49 | INFO     | wolfram_pyqt | Вызов get_text('solv x**2')
+2025-10-26 01:01:49 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Неизвестное действие: solv
+2025-10-26 01:05:51 | INFO     | wolfram_pyqt | Вызов get_text('solv x**2')
+2025-10-26 01:05:51 | ERROR    | wolfram_pyqt | Ошибка в get_text: 'module' object is not callable
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\parser.py", line 33, in get_text
+    suggestion = suggest_correction(user_input.split(' ', 1)[0], actions)
+TypeError: 'module' object is not callable
+2025-10-26 01:09:00 | INFO     | wolfram_pyqt | Вызов get_text('solv x**2')
+2025-10-26 01:09:00 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Неизвестное действие: solv, возможно вы имели в виду solve?
+2025-10-26 01:09:05 | INFO     | wolfram_pyqt | Вызов get_text('solve x**2')
+2025-10-26 01:09:05 | INFO     | wolfram_pyqt | Вызов solve_equation('x**2')
+2025-10-26 01:09:05 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [0]
+2025-10-26 01:09:05 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [0]
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | Вызов get_text('solve sqrt(9)')
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | Вызов parse_user_input('sqrt(9)')
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | Вызов insert_multiplication('sqrt(9)')
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: s*qr*t(9)
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | Вызов replace_math_functions('s*qr*t(9)')
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: s*qr*t(9)
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: s*qr*t(9)
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | Вызов solve_equation('sqrt(9)')
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: []
+2025-10-26 01:27:07 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: []
+2025-10-26 01:31:28 | INFO     | wolfram_pyqt | Вызов get_text('solve sqrt(9)')
+2025-10-26 01:31:28 | INFO     | wolfram_pyqt | Вызов parse_user_input('sqrt(9)')
+2025-10-26 01:31:28 | INFO     | wolfram_pyqt | Вызов insert_multiplication('sqrt(9)')
+2025-10-26 01:31:28 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: None
+2025-10-26 01:31:28 | INFO     | wolfram_pyqt | Вызов replace_math_functions(None)
+2025-10-26 01:31:28 | ERROR    | wolfram_pyqt | Ошибка в replace_math_functions: argument of type 'NoneType' is not a container or iterable
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\parser.py", line 49, in replace_math_functions
+    if func in expression:
+       ^^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not a container or iterable
+2025-10-26 01:31:28 | ERROR    | wolfram_pyqt | Ошибка в parse_user_input: argument of type 'NoneType' is not a container or iterable
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\parser.py", line 55, in parse_user_input
+    expression = replace_math_functions(expression)
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\parser.py", line 49, in replace_math_functions
+    if func in expression:
+       ^^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not a container or iterable
+2025-10-26 01:31:28 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при решении уравнения: argument of type 'NoneType' is not a container or iterable
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | Вызов get_text('solve sqrt(9)')
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | Вызов parse_user_input('sqrt(9)')
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | Вызов insert_multiplication('sqrt(9)')
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: None
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | Вызов replace_math_functions(None)
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: 
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | Вызов solve_equation('sqrt(9)')
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: []
+2025-10-26 01:34:58 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: []
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | Вызов get_text('solve sqrt(9)')
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | Вызов parse_user_input('sqrt(9)')
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | Вызов insert_multiplication('sqrt(9)')
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: s*qr*t(9)
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | Вызов replace_math_functions('s*qr*t(9)')
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: s*qr*t(9)
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: s*qr*t(9)
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | Вызов solve_equation('sqrt(9)')
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: []
+2025-10-26 01:36:50 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: []
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | Вызов get_text('solve sqrt(9)')
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | Вызов parse_user_input('sqrt(9)')
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | Вызов insert_multiplication('sqrt(9)')
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: sqrt(9)
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | Вызов replace_math_functions('sqrt(9)')
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: sympy.sqrt(9)
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: sympy.sqrt(9)
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | Вызов solve_equation('sqrt(9)')
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: []
+2025-10-26 01:37:47 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: []
+2025-10-26 01:39:42 | INFO     | wolfram_pyqt | Вызов get_text('solve sqrt(9)')
+2025-10-26 01:39:42 | INFO     | wolfram_pyqt | Вызов parse_user_input('sqrt(9)')
+2025-10-26 01:39:42 | INFO     | wolfram_pyqt | Вызов insert_multiplication('sqrt(9)')
+2025-10-26 01:39:42 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: sqrt(9)
+2025-10-26 01:39:42 | INFO     | wolfram_pyqt | Вызов replace_math_functions('sqrt(9)')
+2025-10-26 01:39:42 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: sympy.sqrt(9)
+2025-10-26 01:39:42 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: sympy.sqrt(9)
+2025-10-26 01:39:42 | INFO     | wolfram_pyqt | Вызов solve_equation('sympy.sqrt(9)')
+2025-10-26 01:39:42 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: 'Symbol' object has no attribute 'sqrt'
+ValueError: Error from parse_expr with transformed code: "Symbol ('sympy' ).sqrt (Integer (9 ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 24, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1, in <module>
+AttributeError: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 01:39:42 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при решении уравнения: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 01:40:36 | INFO     | wolfram_pyqt | Вызов get_text('solve sqrt(9)')
+2025-10-26 01:40:36 | INFO     | wolfram_pyqt | Вызов parse_user_input('sqrt(9)')
+2025-10-26 01:40:36 | INFO     | wolfram_pyqt | Вызов insert_multiplication('sqrt(9)')
+2025-10-26 01:40:36 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: sqrt(9)
+2025-10-26 01:40:36 | INFO     | wolfram_pyqt | Вызов replace_math_functions('sqrt(9)')
+2025-10-26 01:40:36 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: sympy.sqrt(9)
+2025-10-26 01:40:36 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: sympy.sqrt(9)
+2025-10-26 01:40:36 | INFO     | wolfram_pyqt | Вызов solve_equation('sympy.sqrt(9)')
+2025-10-26 01:40:36 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: 'Symbol' object has no attribute 'sqrt'
+ValueError: Error from parse_expr with transformed code: "Symbol ('sympy' ).sqrt (Integer (9 ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 24, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1, in <module>
+AttributeError: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 01:40:36 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при решении уравнения: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 02:07:07 | INFO     | wolfram_pyqt | Вызов get_text('solve sqrt(9)')
+2025-10-26 02:07:07 | INFO     | wolfram_pyqt | Вызов parse_user_input('sqrt(9)')
+2025-10-26 02:07:07 | INFO     | wolfram_pyqt | Вызов insert_multiplication('sqrt(9)')
+2025-10-26 02:07:07 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: sqrt(9)
+2025-10-26 02:07:07 | INFO     | wolfram_pyqt | Вызов replace_math_functions('sqrt(9)')
+2025-10-26 02:07:07 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: Хsympy.sqrt(9)
+2025-10-26 02:07:07 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: Хsympy.sqrt(9)
+2025-10-26 02:07:07 | INFO     | wolfram_pyqt | Вызов solve_equation('Хsympy.sqrt(9)')
+2025-10-26 02:07:07 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: 'Symbol' object has no attribute 'sqrt'
+ValueError: Error from parse_expr with transformed code: "Symbol ('Хsympy' ).sqrt (Integer (9 ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 24, in solve_equation
+    lhs = sympy.sympify(left_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1, in <module>
+AttributeError: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 02:07:07 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при решении уравнения: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 11:59:02 | INFO     | wolfram_pyqt | Вызов get_text('sqrt(9)')
+2025-10-26 11:59:02 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Неизвестное действие: sqrt(9), возможно вы имели в виду None?
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | Вызов get_text('solve x**2')
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | Вызов parse_user_input('x**2')
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x**2')
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x**2
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x**2')
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x**2
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: x**2
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | Вызов solve_equation('x**2')
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [0]
+2025-10-26 16:40:12 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [0]
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | Вызов get_text('solve x**2 = 9')
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | Вызов parse_user_input('x**2 = 9')
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x**2 = 9')
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x**2 = 9
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x**2 = 9')
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x**2 = 9
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: x**2 = 9
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | Вызов solve_equation('x**2 = 9')
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-3, 3]
+2025-10-26 16:40:37 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-3, 3]
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | Вызов get_text('solve x**2 = y')
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | Вызов parse_user_input('x**2 = y')
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x**2 = y')
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x**2 = y
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x**2 = y')
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x**2 = y
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: x**2 = y
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | Вызов solve_equation('x**2 = y')
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-sqrt(y), sqrt(y)]
+2025-10-26 16:40:45 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-sqrt(y), sqrt(y)]
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | Вызов get_text('solve x**2 = z')
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | Вызов parse_user_input('x**2 = z')
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x**2 = z')
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x**2 = z
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x**2 = z')
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x**2 = z
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: x**2 = z
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | Вызов solve_equation('x**2 = z')
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-sqrt(z), sqrt(z)]
+2025-10-26 16:40:48 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-sqrt(z), sqrt(z)]
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | Вызов get_text('solve x**2 = 25')
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | Вызов parse_user_input('x**2 = 25')
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x**2 = 25')
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x**2 = 25
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x**2 = 25')
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x**2 = 25
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: x**2 = 25
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | Вызов solve_equation('x**2 = 25')
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-5, 5]
+2025-10-26 16:40:52 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-5, 5]
+2025-10-26 16:41:08 | INFO     | wolfram_pyqt | Вызов get_text('solve x = sqrt(25)')
+2025-10-26 16:41:08 | INFO     | wolfram_pyqt | Вызов parse_user_input('x = sqrt(25)')
+2025-10-26 16:41:08 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x = sqrt(25)')
+2025-10-26 16:41:08 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x = sqrt(25)
+2025-10-26 16:41:08 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x = sqrt(25)')
+2025-10-26 16:41:08 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x = Хsympy.sqrt(25)
+2025-10-26 16:41:08 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: x = Хsympy.sqrt(25)
+2025-10-26 16:41:08 | INFO     | wolfram_pyqt | Вызов solve_equation('x = Хsympy.sqrt(25)')
+2025-10-26 16:41:08 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: 'Symbol' object has no attribute 'sqrt'
+ValueError: Error from parse_expr with transformed code: "Symbol ('Хsympy' ).sqrt (Integer (25 ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 24, in solve_equation
+    rhs = sympy.sympify(right_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1, in <module>
+AttributeError: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 16:41:08 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при решении уравнения: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 16:42:06 | INFO     | wolfram_pyqt | Вызов get_text('solve x = sqrt(5)')
+2025-10-26 16:42:06 | INFO     | wolfram_pyqt | Вызов parse_user_input('x = sqrt(5)')
+2025-10-26 16:42:06 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x = sqrt(5)')
+2025-10-26 16:42:06 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x = sqrt(5)
+2025-10-26 16:42:06 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x = sqrt(5)')
+2025-10-26 16:42:06 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x = sympy.sqrt(5)
+2025-10-26 16:42:06 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: x = sympy.sqrt(5)
+2025-10-26 16:42:06 | INFO     | wolfram_pyqt | Вызов solve_equation('x = sympy.sqrt(5)')
+2025-10-26 16:42:06 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: 'Symbol' object has no attribute 'sqrt'
+ValueError: Error from parse_expr with transformed code: "Symbol ('sympy' ).sqrt (Integer (5 ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "f:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "f:\Pycharm\wolframalpha\core\sympy_solver.py", line 24, in solve_equation
+    rhs = sympy.sympify(right_side)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1, in <module>
+AttributeError: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 16:42:06 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при решении уравнения: 'Symbol' object has no attribute 'sqrt'
+2025-10-26 16:52:05 | INFO     | wolfram_pyqt | Вызов get_text('solve x = sqrt(9)')
+2025-10-26 16:52:05 | INFO     | wolfram_pyqt | Вызов parse_user_input('x = sqrt(9)')
+2025-10-26 16:52:05 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x = sqrt(9)')
+2025-10-26 16:52:05 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x = sqrt(9)
+2025-10-26 16:52:05 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x = sqrt(9)')
+2025-10-26 16:52:05 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x = sqrt(9)
+2025-10-26 16:52:05 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('x = sqrt(9)', {'sqrt': <function sqrt at 0x0000016095E47A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 16:52:05 | INFO     | wolfram_pyqt | Вызов solve_equation('x = sqrt(9)', {'sqrt': <function sqrt at 0x0000016095E47A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 16:52:05 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: object is not iterable
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 27, in solve_equation
+    var = sympy.symbols(variable)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\symbol.py", line 864, in symbols
+    return type(names)(result)
+           ~~~~~~~~~~~^^^^^^^^
+TypeError: object is not iterable
+Cannot convert dictionary update sequence element #0 to a sequence
+2025-10-26 16:52:05 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при решении уравнения: object is not iterable
+2025-10-26 16:55:08 | INFO     | wolfram_pyqt | Вызов get_text('solve x = sqrt(9)')
+2025-10-26 16:55:08 | INFO     | wolfram_pyqt | Вызов parse_user_input('x = sqrt(9)')
+2025-10-26 16:55:08 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x = sqrt(9)')
+2025-10-26 16:55:08 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x = sqrt(9)
+2025-10-26 16:55:08 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x = sqrt(9)')
+2025-10-26 16:55:08 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x = sqrt(9)
+2025-10-26 16:55:08 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('x = sqrt(9)', {'sqrt': <function sqrt at 0x0000025A7DB97950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 16:55:08 | INFO     | wolfram_pyqt | Вызов solve_equation('x = sqrt(9)', {'sqrt': <function sqrt at 0x0000025A7DB97950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 16:55:08 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: object is not iterable
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 33, in solve_equation
+    var = sympy.symbols(variable)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\symbol.py", line 864, in symbols
+    return type(names)(result)
+           ~~~~~~~~~~~^^^^^^^^
+TypeError: object is not iterable
+Cannot convert dictionary update sequence element #0 to a sequence
+2025-10-26 16:55:08 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при решении уравнения: object is not iterable
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | Вызов get_text('solve x = sqrt(9)')
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | Вызов parse_user_input('x = sqrt(9)')
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | Вызов insert_multiplication('x = sqrt(9)')
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: x = sqrt(9)
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | Вызов replace_math_functions('x = sqrt(9)')
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: x = sqrt(9)
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('x = sqrt(9)', {'sqrt': <function sqrt at 0x000001B69F657AB0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | Вызов solve_equation('x = sqrt(9)', local_dict={'sqrt': <function sqrt at 0x000001B69F657AB0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [3]
+2025-10-26 17:04:32 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [3]
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | Вызов get_text('solve sqrt(9)')
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | Вызов parse_user_input('sqrt(9)')
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | Вызов insert_multiplication('sqrt(9)')
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: sqrt(9)
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | Вызов replace_math_functions('sqrt(9)')
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: sqrt(9)
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('sqrt(9)', {'sqrt': <function sqrt at 0x000001B69F657AB0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | Вызов solve_equation('sqrt(9)', local_dict={'sqrt': <function sqrt at 0x000001B69F657AB0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: []
+2025-10-26 17:20:03 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: []
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | Вызов get_text('solve 4x + 5 = x')
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x + 5 = x')
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x + 5 = x')
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x + 5 = x
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x + 5 = x')
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x + 5 = x
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x + 5 = x', {'sqrt': <function sqrt at 0x000001B69F657AB0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | Вызов solve_equation('4*x + 5 = x', local_dict={'sqrt': <function sqrt at 0x000001B69F657AB0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-5/3]
+2025-10-26 17:20:44 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-5/3]
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | Вызов get_text('solve 4x^2 + 5x = x')
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2 + 5x = x')
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2 + 5x = x')
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x^2 + 5*x = x
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x^2 + 5*x = x')
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x^2 + 5*x = x
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x^2 + 5*x = x', {'sqrt': <function sqrt at 0x000001B69F657AB0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | Вызов solve_equation('4*x^2 + 5*x = x', local_dict={'sqrt': <function sqrt at 0x000001B69F657AB0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-1, 0]
+2025-10-26 17:21:07 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-1, 0]
+2025-10-26 17:23:17 | INFO     | wolfram_pyqt | Вызов get_text('solve 4x^2 + 5x = 25')
+2025-10-26 17:23:17 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2 + 5x = 25')
+2025-10-26 17:23:17 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2 + 5x = 25')
+2025-10-26 17:23:17 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2 + 5*x = 25
+2025-10-26 17:23:17 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2 + 5*x = 25')
+2025-10-26 17:23:17 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2 + 5*x = 25
+2025-10-26 17:23:17 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2 + 5*x = 25', {'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:17 | INFO     | wolfram_pyqt | Вызов solve_equation('4*x**2 + 5*x = 25', local_dict={'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:18 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-5/8 + 5*sqrt(17)/8, -5*sqrt(17)/8 - 5/8]
+2025-10-26 17:23:18 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-5/8 + 5*sqrt(17)/8, -5*sqrt(17)/8 - 5/8]
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | Вызов get_text('solve 4x^2 + 5x = 100')
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2 + 5x = 100')
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2 + 5x = 100')
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2 + 5*x = 100
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2 + 5*x = 100')
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2 + 5*x = 100
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2 + 5*x = 100', {'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | Вызов solve_equation('4*x**2 + 5*x = 100', local_dict={'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-5/8 + 5*sqrt(65)/8, -5*sqrt(65)/8 - 5/8]
+2025-10-26 17:23:22 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-5/8 + 5*sqrt(65)/8, -5*sqrt(65)/8 - 5/8]
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | Вызов get_text('solve 4x^2 + 5x = 15')
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2 + 5x = 15')
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2 + 5x = 15')
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2 + 5*x = 15
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2 + 5*x = 15')
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2 + 5*x = 15
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2 + 5*x = 15', {'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | Вызов solve_equation('4*x**2 + 5*x = 15', local_dict={'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-5/8 + sqrt(265)/8, -sqrt(265)/8 - 5/8]
+2025-10-26 17:23:27 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-5/8 + sqrt(265)/8, -sqrt(265)/8 - 5/8]
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | Вызов get_text('solve 4x^2 + 5x = 1')
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2 + 5x = 1')
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2 + 5x = 1')
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2 + 5*x = 1
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2 + 5*x = 1')
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2 + 5*x = 1
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2 + 5*x = 1', {'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | Вызов solve_equation('4*x**2 + 5*x = 1', local_dict={'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-5/8 + sqrt(41)/8, -sqrt(41)/8 - 5/8]
+2025-10-26 17:23:28 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-5/8 + sqrt(41)/8, -sqrt(41)/8 - 5/8]
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | Вызов get_text('solve 4x^2 + 5x = 0')
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2 + 5x = 0')
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2 + 5x = 0')
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2 + 5*x = 0
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2 + 5*x = 0')
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2 + 5*x = 0
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2 + 5*x = 0', {'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | Вызов solve_equation('4*x**2 + 5*x = 0', local_dict={'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-5/4, 0]
+2025-10-26 17:23:30 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-5/4, 0]
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | Вызов get_text('solve (4x^2 + 5x) + (5x + 25) = 0')
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | Вызов parse_user_input('(4x^2 + 5x) + (5x + 25) = 0')
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | Вызов insert_multiplication('(4x^2 + 5x) + (5x + 25) = 0')
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: (4*x**2 + 5*x) + (5*x + 25) = 0
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | Вызов replace_math_functions('(4*x**2 + 5*x) + (5*x + 25) = 0')
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: (4*x**2 + 5*x) + (5*x + 25) = 0
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('(4*x**2 + 5*x) + (5*x + 25) = 0', {'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | Вызов solve_equation('(4*x**2 + 5*x) + (5*x + 25) = 0', local_dict={'sqrt': <function sqrt at 0x000002FA145A7A00>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-5/4 - 5*sqrt(3)*I/4, -5/4 + 5*sqrt(3)*I/4]
+2025-10-26 17:23:56 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-5/4 - 5*sqrt(3)*I/4, -5/4 + 5*sqrt(3)*I/4]
+2025-10-26 17:24:48 | INFO     | wolfram_pyqt | Вызов get_text('derivative (4x^2 + 5x) + (5x + 25) = 0')
+2025-10-26 17:24:48 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Неизвестное действие: derivative, возможно вы имели в виду derivative?
+2025-10-26 17:28:19 | INFO     | wolfram_pyqt | Вызов get_text('derivative 4x^2')
+2025-10-26 17:28:19 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2')
+2025-10-26 17:28:19 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2')
+2025-10-26 17:28:19 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2
+2025-10-26 17:28:19 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2')
+2025-10-26 17:28:19 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2
+2025-10-26 17:28:19 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2', {'sqrt': <function sqrt at 0x000001ACF3F77950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:28:19 | INFO     | wolfram_pyqt | Вызов derivative('4*x**2', local_dict={'sqrt': <function sqrt at 0x000001ACF3F77950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:28:19 | ERROR    | wolfram_pyqt | Ошибка в derivative: derivative() got an unexpected keyword argument 'local_dict'
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+TypeError: derivative() got an unexpected keyword argument 'local_dict'
+2025-10-26 17:28:19 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при выполнении derivative: derivative() got an unexpected keyword argument 'local_dict'
+2025-10-26 17:29:59 | INFO     | wolfram_pyqt | Вызов get_text('derivative 4ч:2')
+2025-10-26 17:29:59 | INFO     | wolfram_pyqt | Вызов parse_user_input('4ч:2')
+2025-10-26 17:29:59 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4ч:2')
+2025-10-26 17:29:59 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4ч:2
+2025-10-26 17:29:59 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4ч:2')
+2025-10-26 17:29:59 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4ч:2
+2025-10-26 17:29:59 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4ч:2', {'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:29:59 | INFO     | wolfram_pyqt | Вызов derivative('4ч:2', local_dict={'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:29:59 | ERROR    | wolfram_pyqt | Ошибка в derivative: Sympify of expression 'could not parse '4ч:2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Integer (4 )Symbol ('ч' ):Integer (2 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Integer (4 )Symbol ('ч' ):Integer (2 )
+                ^^^^^^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 56, in derivative
+    expr = sympy.sympify(expression, locals=local_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse '4ч:2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 17:29:59 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при выполнении derivative: Sympify of expression 'could not parse '4ч:2'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | Вызов get_text('derivative 4x^2')
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2')
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2')
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2')
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2', {'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | Вызов derivative('4*x**2', local_dict={'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | derivative успешно выполнена. Результат: 8*x
+2025-10-26 17:30:03 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: 8*x
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | Вызов get_text('derivative 4x^2 + 5x + 3')
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2 + 5x + 3')
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2 + 5x + 3')
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2 + 5*x + 3
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2 + 5*x + 3')
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2 + 5*x + 3
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2 + 5*x + 3', {'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | Вызов derivative('4*x**2 + 5*x + 3', local_dict={'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | derivative успешно выполнена. Результат: 8*x + 5
+2025-10-26 17:30:25 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: 8*x + 5
+2025-10-26 17:30:27 | INFO     | wolfram_pyqt | Вызов get_text('derivative 4x^2 + 5x + 3 = 0')
+2025-10-26 17:30:27 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2 + 5x + 3 = 0')
+2025-10-26 17:30:27 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2 + 5x + 3 = 0')
+2025-10-26 17:30:27 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2 + 5*x + 3 = 0
+2025-10-26 17:30:27 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2 + 5*x + 3 = 0')
+2025-10-26 17:30:27 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2 + 5*x + 3 = 0
+2025-10-26 17:30:27 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2 + 5*x + 3 = 0', {'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:30:27 | INFO     | wolfram_pyqt | Вызов derivative('4*x**2 + 5*x + 3 = 0', local_dict={'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:30:27 | ERROR    | wolfram_pyqt | Ошибка в derivative: Sympify of expression 'could not parse '4*x**2 + 5*x + 3 = 0'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Integer (4 )*Symbol ('x' )**Integer (2 )+Integer (5 )*Symbol ('x' )+Integer (3 )=Integer (0 )"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Integer (4 )*Symbol ('x' )**Integer (2 )+Integer (5 )*Symbol ('x' )+Integer (3 )=Integer (0 )
+                                                                                    ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 56, in derivative
+    expr = sympy.sympify(expression, locals=local_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse '4*x**2 + 5*x + 3 = 0'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 17:30:27 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при выполнении derivative: Sympify of expression 'could not parse '4*x**2 + 5*x + 3 = 0'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | Вызов get_text('derivative 4x^2 + 5x + 3')
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | Вызов parse_user_input('4x^2 + 5x + 3')
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4x^2 + 5x + 3')
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*x**2 + 5*x + 3
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*x**2 + 5*x + 3')
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*x**2 + 5*x + 3
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*x**2 + 5*x + 3', {'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | Вызов derivative('4*x**2 + 5*x + 3', local_dict={'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | derivative успешно выполнена. Результат: 8*x + 5
+2025-10-26 17:30:31 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: 8*x + 5
+2025-10-26 17:31:48 | INFO     | wolfram_pyqt | Вызов get_text('solve loga(x)')
+2025-10-26 17:31:48 | INFO     | wolfram_pyqt | Вызов parse_user_input('loga(x)')
+2025-10-26 17:31:48 | INFO     | wolfram_pyqt | Вызов insert_multiplication('loga(x)')
+2025-10-26 17:31:48 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: loga(x)
+2025-10-26 17:31:48 | INFO     | wolfram_pyqt | Вызов replace_math_functions('loga(x)')
+2025-10-26 17:31:48 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: loga(x)
+2025-10-26 17:31:48 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('loga(x)', {'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:31:48 | INFO     | wolfram_pyqt | Вызов solve_equation('loga(x)', local_dict={'sqrt': <function sqrt at 0x0000024AEBD37950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:31:48 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: 
+No algorithms are implemented to solve equation loga(x) + 0
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 36, in solve_equation
+    solutions = sympy.solve(sympy.Eq(lhs, rhs), var)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\solvers\solvers.py", line 1168, in solve
+    solution = _solve(f[0], *symbols, **flags)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\solvers\solvers.py", line 1722, in _solve
+    raise NotImplementedError('\n'.join([msg, not_impl_msg % f]))
+NotImplementedError: 
+No algorithms are implemented to solve equation loga(x) + 0
+2025-10-26 17:31:48 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при выполнении solve: 
+No algorithms are implemented to solve equation loga(x) + 0
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | Вызов get_text('solve log2(8)')
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | Вызов parse_user_input('log2(8)')
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | Вызов insert_multiplication('log2(8)')
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: log2*(8)
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | Вызов replace_math_functions('log2*(8)')
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: log2*(8)
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('log2*(8)', {'sqrt': <function sqrt at 0x00000129C1BC7950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | Вызов solve_equation('log2*(8)', local_dict={'sqrt': <function sqrt at 0x00000129C1BC7950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: []
+2025-10-26 17:37:49 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: []
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | Вызов get_text('solve log2(8)')
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | Вызов parse_user_input('log2(8)')
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | Вызов insert_multiplication('log(8, 2)')
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: log(8, 2)
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | Вызов replace_math_functions('log(8, 2)')
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: log(8, 2)
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('log(8, 2)', {'sqrt': <function sqrt at 0x000002BD6F367950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | Вызов solve_equation('log(8, 2)', local_dict={'sqrt': <function sqrt at 0x000002BD6F367950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: []
+2025-10-26 17:38:55 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: []
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | Вызов get_text('solve log2(8)')
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | Вызов parse_user_input('log2(8)')
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | Вызов insert_multiplication('log(8, 2)')
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: log(8, 2)
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | Вызов replace_math_functions('log(8, 2)')
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: log(8, 2)
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('log(8, 2)', {'sqrt': <function sqrt at 0x00000218D68CB8A0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | Вызов solve_equation('log(8, 2)', local_dict={'sqrt': <function sqrt at 0x00000218D68CB8A0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: 3
+2025-10-26 17:41:24 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: 3
+2025-10-26 17:41:43 | INFO     | wolfram_pyqt | Вызов get_text('solve log2(x) = 3')
+2025-10-26 17:41:43 | INFO     | wolfram_pyqt | Вызов parse_user_input('log2(x) = 3')
+2025-10-26 17:41:43 | INFO     | wolfram_pyqt | Вызов insert_multiplication('log(x, 2) = 3')
+2025-10-26 17:41:43 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: log(x, 2) = 3
+2025-10-26 17:41:43 | INFO     | wolfram_pyqt | Вызов replace_math_functions('log(x, 2) = 3')
+2025-10-26 17:41:43 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: log(x, 2) = 3
+2025-10-26 17:41:43 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('log(x, 2) = 3', {'sqrt': <function sqrt at 0x00000218D68CB8A0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:41:43 | INFO     | wolfram_pyqt | Вызов solve_equation('log(x, 2) = 3', local_dict={'sqrt': <function sqrt at 0x00000218D68CB8A0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:41:44 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [8]
+2025-10-26 17:41:44 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [8]
+2025-10-26 17:43:19 | INFO     | wolfram_pyqt | Вызов get_text('solve 3*log2(x^2 + 1) - 2*ln(x-1) + log5(x+4) + 1/(x-2) = 0\n')
+2025-10-26 17:43:19 | INFO     | wolfram_pyqt | Вызов parse_user_input('3*log2(x^2 + 1) - 2*ln(x-1) + log5(x+4) + 1/(x-2) = 0')
+2025-10-26 17:43:19 | INFO     | wolfram_pyqt | Вызов insert_multiplication('3*log(x^2 + 1, 2) - 2*ln(x-1) + log(x+4, 5) + 1/(x-2) = 0')
+2025-10-26 17:43:19 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 3*log(x**2 + 1, 2) - 2*ln(x-1) + log(x+4, 5) + 1/(x-2) = 0
+2025-10-26 17:43:19 | INFO     | wolfram_pyqt | Вызов replace_math_functions('3*log(x**2 + 1, 2) - 2*ln(x-1) + log(x+4, 5) + 1/(x-2) = 0')
+2025-10-26 17:43:19 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 3*log(x**2 + 1, 2) - 2*ln(x-1) + log(x+4, 5) + 1/(x-2) = 0
+2025-10-26 17:43:19 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('3*log(x**2 + 1, 2) - 2*ln(x-1) + log(x+4, 5) + 1/(x-2) = 0', {'sqrt': <function sqrt at 0x00000218D68CB8A0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:43:19 | INFO     | wolfram_pyqt | Вызов solve_equation('3*log(x**2 + 1, 2) - 2*ln(x-1) + log(x+4, 5) + 1/(x-2) = 0', local_dict={'sqrt': <function sqrt at 0x00000218D68CB8A0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:43:22 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: multiple generators [x, log(x + 4), log(x - 1), log(x**2 + 1)]
+No algorithms are implemented to solve equation (-2*log(x - 1) + log(x + 4)/log(5) + 3*log(x**2 + 1)/log(2) + 1/(x - 2)) + 0
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 26, in solve_equation
+    solutions = sympy.solve(sympy.Eq(lhs, rhs), var)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\solvers\solvers.py", line 1168, in solve
+    solution = _solve(f[0], *symbols, **flags)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\solvers\solvers.py", line 1722, in _solve
+    raise NotImplementedError('\n'.join([msg, not_impl_msg % f]))
+NotImplementedError: multiple generators [x, log(x + 4), log(x - 1), log(x**2 + 1)]
+No algorithms are implemented to solve equation (-2*log(x - 1) + log(x + 4)/log(5) + 3*log(x**2 + 1)/log(2) + 1/(x - 2)) + 0
+2025-10-26 17:43:22 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при выполнении solve: multiple generators [x, log(x + 4), log(x - 1), log(x**2 + 1)]
+No algorithms are implemented to solve equation (-2*log(x - 1) + log(x + 4)/log(5) + 3*log(x**2 + 1)/log(2) + 1/(x - 2)) + 0
+2025-10-26 17:45:21 | INFO     | wolfram_pyqt | Вызов get_text('solve 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0\n')
+2025-10-26 17:45:21 | INFO     | wolfram_pyqt | Вызов parse_user_input('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 17:45:21 | INFO     | wolfram_pyqt | Вызов insert_multiplication('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 17:45:21 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 17:45:21 | INFO     | wolfram_pyqt | Вызов replace_math_functions('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 17:45:21 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 17:45:21 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', {'sqrt': <function sqrt at 0x0000019DB637B950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:45:21 | INFO     | wolfram_pyqt | Вызов solve_equation('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', local_dict={'sqrt': <function sqrt at 0x0000019DB637B950>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:45:24 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Could not find root within given tolerance. (42.8007267428028707322 > 2.16840434497100886801e-19)
+Try another starting point or tweak arguments.
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 35, in solve_equation
+    solutions = solve(Eq(lhs, rhs), var)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\solvers\solvers.py", line 1168, in solve
+    solution = _solve(f[0], *symbols, **flags)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\solvers\solvers.py", line 1722, in _solve
+    raise NotImplementedError('\n'.join([msg, not_impl_msg % f]))
+NotImplementedError: multiple generators [x, log(x + 4), log(x - 1), log(x**2 + 1)]
+No algorithms are implemented to solve equation (-2*log(x - 1) + log(x + 4)/log(5) + 3*log(x**2 + 1)/log(2) + 1/(x - 2)) + 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 40, in solve_equation
+    solutions = [N(nsolve(expr, var, 1))]
+                   ~~~~~~^^^^^^^^^^^^^^
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\utilities\decorator.py", line 93, in func_wrapper
+    return func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\solvers\solvers.py", line 3079, in nsolve
+    x = sympify(findroot(f, x0, **kwargs))
+                ~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\mpmath\calculus\optimization.py", line 985, in findroot
+    raise ValueError('Could not find root within given tolerance. '
+    ...<2 lines>...
+                     % (norm(f(*xl))**2, tol))
+ValueError: Could not find root within given tolerance. (42.8007267428028707322 > 2.16840434497100886801e-19)
+Try another starting point or tweak arguments.
+2025-10-26 17:45:24 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Ошибка при выполнении solve: Could not find root within given tolerance. (42.8007267428028707322 > 2.16840434497100886801e-19)
+Try another starting point or tweak arguments.
+2025-10-26 17:50:15 | INFO     | wolfram_pyqt | Вызов get_text('solve 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0\n')
+2025-10-26 17:50:15 | INFO     | wolfram_pyqt | Вызов parse_user_input('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 17:50:15 | INFO     | wolfram_pyqt | Вызов insert_multiplication('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 17:50:15 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 17:50:15 | INFO     | wolfram_pyqt | Вызов replace_math_functions('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 17:50:15 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 17:50:15 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', {'sqrt': <function sqrt at 0x0000027796DF0720>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:50:15 | INFO     | wolfram_pyqt | Вызов solve_equation('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', local_dict={'sqrt': <function sqrt at 0x0000027796DF0720>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:50:18 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [nan]
+2025-10-26 17:50:18 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [nan]
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | Вызов get_text('solve log2(x) = 3')
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | Вызов parse_user_input('log2(x) = 3')
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | Вызов insert_multiplication('log(x, 2) = 3')
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: log(x, 2) = 3
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | Вызов replace_math_functions('log(x, 2) = 3')
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: log(x, 2) = 3
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('log(x, 2) = 3', {'sqrt': <function sqrt at 0x0000027796DF0720>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | Вызов solve_equation('log(x, 2) = 3', local_dict={'sqrt': <function sqrt at 0x0000027796DF0720>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [8]
+2025-10-26 17:50:34 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [8]
+2025-10-26 18:32:33 | INFO     | wolfram_pyqt | Вызов get_text('solve 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 18:32:33 | INFO     | wolfram_pyqt | Вызов parse_user_input('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 18:32:33 | INFO     | wolfram_pyqt | Вызов insert_multiplication('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 18:32:33 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 18:32:33 | INFO     | wolfram_pyqt | Вызов replace_math_functions('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 18:32:33 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 18:32:33 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', {'sqrt': <function sqrt at 0x000001441DC405C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 18:32:33 | INFO     | wolfram_pyqt | Вызов solve_equation('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', local_dict={'sqrt': <function sqrt at 0x000001441DC405C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 18:32:38 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: Не удалось найти решения для: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 18:32:38 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Не удалось найти решения для: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 18:34:36 | INFO     | wolfram_pyqt | Вызов get_text('solve 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 18:34:36 | INFO     | wolfram_pyqt | Вызов parse_user_input('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 18:34:36 | INFO     | wolfram_pyqt | Вызов insert_multiplication('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 18:34:36 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 18:34:36 | INFO     | wolfram_pyqt | Вызов replace_math_functions('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 18:34:36 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 18:34:36 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', {'sqrt': <function sqrt at 0x0000024DBBF505C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 18:34:36 | INFO     | wolfram_pyqt | Вызов solve_equation('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', local_dict={'sqrt': <function sqrt at 0x0000024DBBF505C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 18:34:40 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [1.873250367]
+2025-10-26 18:34:40 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [1.873250367]
+2025-10-26 19:08:58 | INFO     | wolfram_pyqt | Вызов get_text('solve 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 19:08:58 | INFO     | wolfram_pyqt | Вызов parse_user_input('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 19:08:58 | INFO     | wolfram_pyqt | Вызов insert_multiplication('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 19:08:58 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 19:08:58 | INFO     | wolfram_pyqt | Вызов replace_math_functions('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 19:08:58 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 19:08:58 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', {'sqrt': <function sqrt at 0x0000020E380005C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 19:08:58 | INFO     | wolfram_pyqt | Вызов solve_equation('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', local_dict={'sqrt': <function sqrt at 0x0000020E380005C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 19:09:01 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [1.873250367047404]
+2025-10-26 19:09:01 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [1.873250367047404]
+2025-10-26 21:40:25 | INFO     | wolfram_pyqt | Вызов get_text('solve 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 21:40:25 | INFO     | wolfram_pyqt | Вызов parse_user_input('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 21:40:25 | INFO     | wolfram_pyqt | Вызов insert_multiplication('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 21:40:25 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 21:40:25 | INFO     | wolfram_pyqt | Вызов replace_math_functions('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 21:40:25 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 21:40:25 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', {'sqrt': <function sqrt at 0x000001BB30A6B1C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 21:40:25 | INFO     | wolfram_pyqt | Вызов solve_equation('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', local_dict={'sqrt': <function sqrt at 0x000001BB30A6B1C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 21:40:29 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [1.873250367047404]
+2025-10-26 21:40:29 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [1.873250367047404]
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | Вызов get_text('solve 4*cos(x)**2 + 8*sin(x) + 1 = 0')
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | Вызов parse_user_input('4*cos(x)**2 + 8*sin(x) + 1 = 0')
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | Вызов insert_multiplication('4*cos(x)**2 + 8*sin(x) + 1 = 0')
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 4*cos(x)**2 + 8*sin(x) + 1 = 0
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | Вызов replace_math_functions('4*cos(x)**2 + 8*sin(x) + 1 = 0')
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 4*cos(x)**2 + 8*sin(x) + 1 = 0
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('4*cos(x)**2 + 8*sin(x) + 1 = 0', {'sqrt': <function sqrt at 0x000001BB30A6B1C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | Вызов solve_equation('4*cos(x)**2 + 8*sin(x) + 1 = 0', local_dict={'sqrt': <function sqrt at 0x000001BB30A6B1C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [-5*pi/6, -pi/6, 2*atan(2/5 - sqrt(21)*I/5), 2*atan(2/5 + sqrt(21)*I/5)]
+2025-10-26 21:46:47 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [-5*pi/6, -pi/6, 2*atan(2/5 - sqrt(21)*I/5), 2*atan(2/5 + sqrt(21)*I/5)]
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | Вызов get_text('solve a*tan(x) - 2*sin(x) + 3 = 0')
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | Вызов parse_user_input('a*tan(x) - 2*sin(x) + 3 = 0')
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | Вызов insert_multiplication('a*tan(x) - 2*sin(x) + 3 = 0')
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: a*tan(x) - 2*sin(x) + 3 = 0
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | Вызов replace_math_functions('a*tan(x) - 2*sin(x) + 3 = 0')
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: a*tan(x) - 2*sin(x) + 3 = 0
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('a*tan(x) - 2*sin(x) + 3 = 0', {'sqrt': <function sqrt at 0x000001BB30A6B1C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | Вызов solve_equation('a*tan(x) - 2*sin(x) + 3 = 0', local_dict={'sqrt': <function sqrt at 0x000001BB30A6B1C0>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo})
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: Не удалось найти решения для: a*tan(x) - 2*sin(x) + 3 = 0
+2025-10-26 21:47:06 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Не удалось найти решения для: a*tan(x) - 2*sin(x) + 3 = 0
+2025-10-26 21:59:58 | INFO     | wolfram_pyqt | Вызов get_text('solve y = 5 + 5')
+2025-10-26 21:59:58 | INFO     | wolfram_pyqt | Вызов parse_user_input('y = 5 + 5')
+2025-10-26 21:59:58 | INFO     | wolfram_pyqt | Вызов insert_multiplication('y = 5 + 5')
+2025-10-26 21:59:58 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: y = 5 + 5
+2025-10-26 21:59:58 | INFO     | wolfram_pyqt | Вызов replace_math_functions('y = 5 + 5')
+2025-10-26 21:59:58 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: y = 5 + 5
+2025-10-26 21:59:58 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('y = 5 + 5', {'sqrt': <function sqrt at 0x000001B8EEEE7270>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo, 'tg': tan, 'ctg': cot})
+2025-10-26 21:59:58 | INFO     | wolfram_pyqt | Вызов solve_equation('y = 5 + 5', local_dict={'sqrt': <function sqrt at 0x000001B8EEEE7270>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo, 'tg': tan, 'ctg': cot})
+2025-10-26 21:59:59 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: y - 10.0
+2025-10-26 21:59:59 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: y - 10.0
+2025-10-26 22:04:43 | INFO     | wolfram_pyqt | Вызов get_text('solve 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 22:04:43 | INFO     | wolfram_pyqt | Вызов parse_user_input('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 22:04:43 | INFO     | wolfram_pyqt | Вызов insert_multiplication('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 22:04:43 | INFO     | wolfram_pyqt | insert_multiplication успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 22:04:43 | INFO     | wolfram_pyqt | Вызов replace_math_functions('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0')
+2025-10-26 22:04:43 | INFO     | wolfram_pyqt | replace_math_functions успешно выполнена. Результат: 3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0
+2025-10-26 22:04:43 | INFO     | wolfram_pyqt | parse_user_input успешно выполнена. Результат: ('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', {'sqrt': <function sqrt at 0x000001B8EEEE7270>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo, 'tg': tan, 'ctg': cot})
+2025-10-26 22:04:43 | INFO     | wolfram_pyqt | Вызов solve_equation('3*log(x**2 + 1)/log(2) - 2*log(x-1) + log(x+4)/log(5) + 1/(x-2) = 0', local_dict={'sqrt': <function sqrt at 0x000001B8EEEE7270>, 'log': log, 'ln': log, 'exp': exp, 'sin': sin, 'cos': cos, 'tan': tan, 'cot': cot, 'sec': sec, 'csc': csc, 'sinh': sinh, 'cosh': cosh, 'tanh': tanh, 'factorial': factorial, 'binomial': binomial, 'And': And, 'Or': Or, 'Not': Not, 'pi': pi, 'E': E, 'oo': oo, 'tg': tan, 'ctg': cot})
+2025-10-26 22:04:47 | INFO     | wolfram_pyqt | solve_equation успешно выполнена. Результат: [1.873250367047404]
+2025-10-26 22:04:47 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: [1.873250367047404]
+2025-10-26 22:08:37 | INFO     | wolfram_pyqt | Вызов get_text(' goyda log2(x)=2')
+2025-10-26 22:08:37 | INFO     | wolfram_pyqt | get_text успешно выполнена. Результат: Неизвестное действие: , возможно вы имели в виду None?
