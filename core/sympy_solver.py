@@ -417,3 +417,4 @@ def derivative(expression: str, variable: str = 'x', local_dict=None):
     derivative_expr = sympy.diff(expr, var)
 
     return derivative_expr
+
