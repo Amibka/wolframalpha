@@ -1,10 +1,13 @@
-from core.sympy_solver import derivative, solve_equation
+import json
+import re
+
+import sympy
+
 from core.actions import actions
 from core.math_functions import math_functions
+from core.sympy_solver import derivative, solve_equation
 from logs.logger import log_call
 from utils.suggest_correction import suggest_correction
-import re
-import sympy
 
 
 @log_call
@@ -109,13 +112,83 @@ def get_text(user_input: str):
     if not user_input:
         return "Пожалуйста, введите математическое выражение."
 
-    first_word = user_input.split(' ', 1)[0]
-    expression = user_input[len(first_word):].strip()
+#    for action in actions:
+#        if action in user_input:
+#            first_word = user_input.split(' ', 1)[0]
+#            expression = user_input[len(first_word):].strip()
+#        else:
+#            first_word = action
+#            expression = expression
+
+
+
+    with open("language/commands_translate.json", "r", encoding="utf-8") as f:
+        COMMAND_TRANSLATE  = json.load(f)
+
+    def get_first_word(user_input):
+        user_input = user_input.lower().strip()
+        for first_word, synonyms in COMMAND_TRANSLATE.items():
+            for synonym in synonyms:
+                if user_input.startswith(synonym):
+                    # заменяем синоним на основную команду
+                    expression = user_input[len(synonym):].strip()
+                    return first_word, expression
+        return "solve", user_input
+
+
+    #Команда по умолчанию
+    first_word, expression = get_first_word(user_input)
+
+    # проверка, есть ли явная команда в начале строки
+    parts = user_input.strip().split(' ', 1)  # разделяем на слово и остальное
+    if parts[0] in actions and len(parts) > 1:
+        first_word = parts[0]  # команда явно указана
+        expression = parts[1]
+
+    # Убираем = так как нельзя подставить в некоторые функции
+    if '=' in expression and first_word != 'solve':
+        expression = expression.split('=')[0].strip()
 
     # Словарь действий и соответствующих функций
     action_map = {
         "solve": lambda expr: solve_expression(expr),
         "derivative": lambda expr: derivative_expression(expr),
+        "simplify": lambda expr: sympy.simplify(expr),
+        "expand": lambda expr: sympy.expand(expr),
+        "expand_trig": lambda expr: sympy.trigsimp(expr),
+        "expand_log": lambda expr: sympy.log(expr),
+        "expand_power_exp": lambda expr: sympy.exp(expr),
+        "factor": lambda expr: sympy.factor(expr),
+        "factorint": lambda expr: sympy.factorint(expr),
+        "collect": lambda expr: sympy.collect(expr),
+        "cancel": lambda expr: sympy.cancel(expr),
+        "together": lambda expr: sympy.together(expr),
+        "apart": lambda expr: sympy.apart(expr),
+        "radsimp": lambda expr: sympy.radsimp(expr),
+        "powsimp": lambda expr: sympy.powsimp(expr),
+        "logcombine": lambda expr: sympy.logcombine(expr),
+        "nsimplify": lambda expr: sympy.nsimplify(expr),
+        "sqrtdenest": lambda expr: sympy.sqrtdenest(expr),
+        "residue": lambda expr: sympy.residue(expr),
+        "ratsimp": lambda expr: sympy.ratsimp(expr),
+        "cancel_common_factors": lambda expr: sympy.cancel_common_factors(expr),
+        "factor_terms": lambda expr: sympy.factor_terms(expr),
+        "simplify_rational": lambda expr: sympy.simplify(expr),
+        "simplify_logic": lambda expr: sympy.simplify(expr),
+        "cse": lambda expr: sympy.cse(expr),
+        "separatevars": lambda expr: sympy.separatevars(expr),
+        "logcombine": lambda expr: sympy.logcombine(expr),
+        "expand_complex": lambda expr: sympy.expand_complex(expr),
+        "simplify_fraction": lambda expr: sympy.simplify(expr),
+        "denest": lambda expr: sympy.denest(expr),
+        "together_cancel": lambda expr: sympy.together(expr),
+
+
+
+
+
+
+
         # можно добавлять новые действия сюда
     }
 

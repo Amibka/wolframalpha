@@ -2,35 +2,27 @@
 # Математические функции
 # ==========================
 math_functions = [
-    # числа
-    "abs",
-    "sqrt",
-    "nth_root",
-    "log",
-    "ln",
-    "exp",
+    # тригонометрические (прямые и обратные)
+    "sin", "cos", "tan", "cot", "sec", "csc",
+    "asin", "acos", "atan", "acot", "asec", "acsc",
 
-    # тригонометрические
-    "sin",
-    "cos",
-    "tan",
-    "cot",
-    "sec",
-    "csc",
+    # гиперболические (и некоторые обратные)
+    "sinh", "cosh", "tanh", "coth", "sech", "csch",
+    "asinh", "acosh", "atanh",
 
-    # гиперболические
-    "sinh",
-    "cosh",
-    "tanh",
+    # экспоненты / логарифмы / степени / корни
+    "exp", "log", "ln",          # ln — алиас для log в SymPy
+    "sqrt", "root",              # sqrt(x) и root(x, n)
+    "pow",                       # степень (обычно x**y, но есть вспомогательные функции)
 
-    # комбинаторика
-    "factorial",
-    "binomial",
+    # базовые числовые функции
+    "Abs", "sign", "floor", "ceiling", "factorial",
 
-    # логические / множества
-    "And",
-    "Or",
-    "Not",
-    "is_real",
-    "is_integer"
+    # специальные функции (часто используются как sympy.<name>)
+    "gamma", "loggamma", "digamma", "polygamma",
+    "beta", "zeta", "erf", "erfc",
+    "besselj", "bessely", "besseli", "besselk",
+
+    # комплексные/утилитарные математические
+    "re", "im", "arg", "conjugate",
 ]
