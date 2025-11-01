@@ -1,11 +1,10 @@
 actions = ['simplify', 'expand', 'expand_trig', 'expand_log', 'expand_power_exp', 'factor', 'factorint', 'collect',
            'cancel', 'together',
            'apart', 'radsimp', 'powsimp', 'logcombine', 'nsimplify', 'sqrtdenest', 'residue', 'ratsimp',
-           'cancel_common_factors',
            'factor_terms', 'simplify_rational', 'simplify_logic', 'cse', 'separatevars', 'logcombine', 'expand_complex',
            'simplify_fraction', 'denest', 'together_cancel',
 
-           'Poly', 'polys', 'degree', 'LC', 'LM', 'LT', 'coeffs', 'monoms', 'div', 'quo', 'rem', 'gcd', 'lcm',
+           'Poly', 'degree', 'LC', 'LM', 'LT', 'div', 'quo', 'rem', 'gcd', 'lcm',
            'content', 'primitive', 'sqf_list',
            'factor_list', 'resultant', 'discriminant', 'interpolate',
            'hermite_interpolate', 'lagrange_interpolate', 'symmetrize',
