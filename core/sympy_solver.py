@@ -403,61 +403,6 @@ def solve_equation(equation: str, variable: str = None, local_dict=None, numeric
 
 
 # ============================================
-# ОБНОВЛЕННАЯ ФУНКЦИЯ derivative_expression
-# ============================================
-
-#@log_call
-#def derivative_expression(expression: str):
-#    """
-#    Обёртка для вычисления производной с предобработкой выражения.
-#    Извлекает переменную из "at <var>" или "по <var>" ДО парсинга.
-#
-#    :param expression: Строка типа "at y 4x + 1y" или "по x x**2 + y"
-#    :return: Строковое представление производной
-#    """
-#    if not expression:
-#        return "Пустое выражение"
-#
-#    # ШАГ 1: Извлекаем переменную ДО парсинга
-#    variable = None
-#    clean_expr = expression
-#
-#    # Ищем "at <variable>" (английский) - должно быть отдельным словом
-#    match_en = re.search(r'\bat\s+([a-zA-Z])\b', expression, re.IGNORECASE)
-#    if match_en:
-#        variable = match_en.group(1)
-#        # Убираем "at <variable>" из строки
-#        clean_expr = re.sub(r'\bat\s+[a-zA-Z]\b', '', expression, flags=re.IGNORECASE).strip()
-#
-#    # Ищем "по <variable>" (русский)
-#    match_ru = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression, re.IGNORECASE)
-#    if match_ru:
-#        variable = match_ru.group(1)
-#        # Убираем "по <variable>" из строки
-#        clean_expr = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression, flags=re.IGNORECASE).strip()
-#
-#    print(f"Original expression: {expression}")
-#    print(f"Cleaned expression: {clean_expr}")
-#    print(f"Extracted variable: {variable}")
-#
-#    # ШАГ 2: Теперь парсим очищенное выражение (без "at y" или "по x")
-#    parsed_expr, local_dict = parse_user_input(clean_expr)
-#
-#    # ШАГ 3: Вызываем основную функцию derivative
-#    try:
-#        # Если переменная была извлечена, добавляем её обратно в формате "по <var>"
-#        if variable:
-#            expr_with_var = f"{parsed_expr} по {variable}"
-#        else:
-#            expr_with_var = parsed_expr
-#
-#        result = derivative(expr_with_var, local_dict=local_dict)
-#        return str(result)
-#    except Exception as e:
-#        return f"Ошибка: {e}"
-
-
-# ============================================
 # ОБНОВЛЕННАЯ ФУНКЦИЯ derivative
 # ============================================
 
@@ -485,8 +430,6 @@ def derivative(expression: str, local_dict=None):
         expression = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression, flags=re.IGNORECASE).strip()
     else:
         variable = None
-
-    print(f"Parsed expression for derivative: {expression}")
 
     # Преобразуем строку в символьное выражение
     try:

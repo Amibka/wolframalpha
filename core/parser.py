@@ -4,7 +4,7 @@ import re
 import sympy
 from sympy.abc import a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
 
-from core.actions import actions
+from core.actions import actions, actions_ru
 from core.math_functions import math_functions
 
 from core.sympy_solver import derivative, solve_equation, calculation_residue, poly_func, degree_func, rem_func, \
@@ -14,7 +14,7 @@ from core.sympy_solver import derivative, solve_equation, calculation_residue, p
     LT_func, sqf_list_func
 
 from logs.logger import log_call
-from utils.suggest_correction import suggest_correction
+from utils.suggest_correction import suggest_correction, suggest_correction_ru
 
 
 @log_call
@@ -136,23 +136,56 @@ def get_text(user_input: str):
         COMMAND_TRANSLATE = json.load(f)
 
     def get_first_word(user_input):
+        user_input_original = user_input
         user_input = user_input.lower().strip()
+
+        # Сначала проверяем точное совпадение с командами из COMMAND_TRANSLATE
         for first_word, synonyms in COMMAND_TRANSLATE.items():
-            for synonym in synonyms:
+            # ВАЖНО: Сортируем синонимы по длине (от длинных к коротким)
+            # Чтобы "решить" проверялся раньше, чем "реши"
+            sorted_synonyms = sorted(synonyms, key=len, reverse=True)
+
+            for synonym in sorted_synonyms:
+                # Проверяем, что после синонима либо конец строки, либо пробел
                 if user_input.startswith(synonym):
-                    # заменяем синоним на основную команду
-                    expression = user_input[len(synonym):].strip()
-                    return first_word, expression
+                    # Проверяем, что это именно команда, а не часть слова
+                    next_char_pos = len(synonym)
+                    if next_char_pos >= len(user_input) or user_input[next_char_pos].isspace():
+                        # заменяем синоним на основную команду
+                        expression = user_input[len(synonym):].strip()
+                        return first_word, expression
+
+        # Если команда не найдена, пробуем найти похожую
+        first_word_input = user_input.split()[0] if user_input.split() else user_input
+
+        # Определяем язык по первому слову
+        # Проверяем, содержит ли слово кириллицу
+        is_russian = any('а' <= c <= 'я' or 'А' <= c <= 'Я' for c in first_word_input)
+
+        if is_russian:
+            suggestion = suggest_correction_ru(first_word_input, actions_ru)
+            if suggestion:
+                return "error", f'Неизвестное действие: "{first_word_input}", возможно вы имели в виду "{suggestion}"?'
+        else:
+            suggestion = suggest_correction(first_word_input, actions)
+            if suggestion:
+                return "error", f'Неизвестное действие: "{first_word_input}", возможно вы имели в виду "{suggestion}"?'
+
+        # Если не нашли похожую команду, используем solve по умолчанию
         return "solve", user_input
 
     # Команда по умолчанию
     first_word, expression = get_first_word(user_input)
 
+    if first_word == "error":
+        return expression  # expression содержит сообщение об ошибке
+
     # проверка, есть ли явная команда в начале строки
-    parts = user_input.strip().split(' ', 1)  # разделяем на слово и остальное
+    parts = user_input.strip().split(' ', 1)
     if parts[0] in actions and len(parts) > 1:
-        first_word = parts[0]  # команда явно указана
+        first_word = parts[0]
         expression = parts[1]
+
 
     # Убираем = так как нельзя подставить в некоторые функции
     if '=' in expression and first_word != 'solve':
@@ -188,22 +221,17 @@ def get_text(user_input: str):
         "separatevars": lambda expr: separatevars_expression(expr),
 
         # Операции с несколькими аргументами
-        "gcd": lambda expr: gcd_expression(expr),
-        "lcm": lambda expr: lcm_expression(expr),
-        "div": lambda expr: div_expression(expr),
-        "quo": lambda expr: quo_expression(expr),
-        "rem": lambda expr: rem_expression(expr),
+        "advanced.gcd": lambda expr: gcd_expression(expr),
+        "advanced.lcm": lambda expr: lcm_expression(expr),
+        "advanced.div": lambda expr: div_expression(expr),
+        "advanced.quo": lambda expr: quo_expression(expr),
+        "advanced.rem": lambda expr: rem_expression(expr),
 
-        # Полиномы
-        "poly": lambda expr: poly_expression(expr),
-        "Poly": lambda expr: poly_expression(expr),
-        "degree": lambda expr: degree_expression(expr),
-        "content": lambda expr: content_expression(expr),
-        "primitive": lambda expr: primitive_expression(expr),
-        "LC": lambda expr: LC_expression(expr),
-        "LM": lambda expr: LM_expression(expr),
-        "LT": lambda expr: LT_expression(expr),
-        "sqf_list": lambda expr: sympy.sqf_list(expr)
+
+        "advanced.Poly": lambda expr: poly_expression(expr),
+        "advanced.degree": lambda expr: degree_expression(expr),
+        "advanced.content": lambda expr: content_expression(expr),
+        "advanced.primitive": lambda expr: primitive_expression(expr),
     }
 
     # Если действие есть в словаре
@@ -214,8 +242,7 @@ def get_text(user_input: str):
             return f"Ошибка при выполнении {first_word}: {e}"
 
     # Если действия нет — подсказка
-    suggestion = suggest_correction(first_word, actions)
-    return f'Неизвестное действие: {first_word}, возможно вы имели в виду {suggestion}?'
+
 
 
 # ============================================
@@ -651,89 +678,3 @@ def primitive_expression(expression: str):
 
     print(f"Parsed expression for primitive: {expr_with_var}")
     return primitive_func(expr_with_var, local_dict=local_dict)
-
-
-def LC_expression(expression: str):
-    """
-    LC - Leading Coefficient (старший коэффициент).
-    Пример: LC 3*x**2 + 2*x + 1 по x → 3
-    """
-    variable, clean_expr, error = extract_variable(expression, ['по', 'at', 'by', 'in'])
-
-    if error:
-        return f"Ошибка: {error}"
-
-    parsed_expression, local_dict = parse_user_input(clean_expr)
-
-    if variable:
-        expr_with_var = f"{parsed_expression} по {variable}"
-    else:
-        expr_with_var = parsed_expression
-
-    print(f"Parsed expression for LC: {expr_with_var}")
-    return LC_func(expr_with_var, local_dict=local_dict)
-
-
-def LM_expression(expression: str):
-    """
-    LM - Leading Monomial (старший одночлен).
-    Пример: LM 3*x**2 + 2*x + 1 по x → x**2
-    """
-    variable, clean_expr, error = extract_variable(expression, ['по', 'at', 'by', 'in'])
-
-    if error:
-        return f"Ошибка: {error}"
-
-    parsed_expression, local_dict = parse_user_input(clean_expr)
-
-    if variable:
-        expr_with_var = f"{parsed_expression} по {variable}"
-    else:
-        expr_with_var = parsed_expression
-
-    print(f"Parsed expression for LM: {expr_with_var}")
-    return LM_func(expr_with_var, local_dict=local_dict)
-
-
-def LT_expression(expression: str):
-    """
-    LT - Leading Term (старший член = LC * LM).
-    Пример: LT 3*x**2 + 2*x + 1 по x → 3*x**2
-    """
-    variable, clean_expr, error = extract_variable(expression, ['по', 'at', 'by', 'in'])
-
-    if error:
-        return f"Ошибка: {error}"
-
-    parsed_expression, local_dict = parse_user_input(clean_expr)
-
-    if variable:
-        expr_with_var = f"{parsed_expression} по {variable}"
-    else:
-        expr_with_var = parsed_expression
-
-    print(f"Parsed expression for LT: {expr_with_var}")
-    return LT_func(expr_with_var, local_dict=local_dict)
-
-
-# В файл с wrapper-функциями:
-def sqf_list_expression(expression: str):
-    """
-    sqf_list - разложение на квадратно-свободные множители.
-    Пример: sqf_list x**2 * (x + 1)**2 → [(x, 1), (x + 1, 2)]
-    """
-    variable, clean_expr, error = extract_variable(expression, ['по', 'at', 'by', 'in'])
-
-    if error:
-        return f"Ошибка: {error}"
-
-    parsed_expression, local_dict = parse_user_input(clean_expr)
-
-    if variable:
-        expr_with_var = f"{parsed_expression} по {variable}"
-    else:
-        expr_with_var = parsed_expression
-
-    print(f"Parsed expression for sqf_list: {expr_with_var}")
-    return sqf_list_func(expr_with_var, local_dict=local_dict)
-

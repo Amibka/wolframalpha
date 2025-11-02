@@ -5,6 +5,7 @@ math_functions = [
     # тригонометрические (прямые и обратные)
     "sin", "cos", "tan", "cot", "sec", "csc",
     "asin", "acos", "atan", "acot", "asec", "acsc",
+    "tg", "ctg",
 
     # гиперболические (и некоторые обратные)
     "sinh", "cosh", "tanh", "coth", "sech", "csch",
