@@ -25,4 +25,6 @@ math_functions = [
 
     # комплексные/утилитарные математические
     "re", "im", "arg", "conjugate",
+
+    'e', 'E', 'i', 'I', 'pi', 'sin', 'cos', 'tan', 'log', 'ln', 'exp', 'oo', 'integral'
 ]

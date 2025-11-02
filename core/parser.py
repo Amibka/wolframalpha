@@ -261,6 +261,30 @@ def extract_variable(expression: str, keywords=None, required=False, auto_detect
 
         return None, clean_expr, None
 
+    if auto_detect:
+        # Ищем все одиночные буквы в выражении (в том числе приклеенные к цифрам)
+        excluded = math_functions
+
+        # Улучшенный паттерн: находит буквы даже если они приклеены к цифрам/операторам
+        # Исключаем буквы внутри длинных слов (функции типа sin, cos, log)
+        var_pattern = r'(?<![a-zA-Z])([a-zA-Z])(?![a-zA-Z])'
+        variables = re.findall(var_pattern, expression)
+
+        # Фильтруем переменные
+        valid_vars = [v for v in set(variables) if v not in excluded]
+
+        if valid_vars:
+            # Приоритет: x -> y -> z -> первая найденная
+            if 'x' in valid_vars:
+                return 'x', expression, None
+            elif 'y' in valid_vars:
+                return 'y', expression, None
+            elif 'z' in valid_vars:
+                return 'z', expression, None
+            else:
+                return valid_vars[0], expression, None
+
+
     # ШАГ 3: Ключевого слова нет
     if required and not auto_detect:
         keywords_str = "', '".join(keywords)
@@ -275,9 +299,27 @@ def extract_variable(expression: str, keywords=None, required=False, auto_detect
 # ============================================
 
 def solve_expression(expression: str):
-    parsed_expression, local_dict = parse_user_input(expression)
+    """
+    Обёртка для solve с автоматическим извлечением переменной.
+    """
+    # Извлекаем переменную через универсальную функцию
+    variable, clean_expr, error = extract_variable(
+        expression,
+        keywords=['по', 'at', 'by', 'in'],
+        auto_detect=True  # Включаем автоопределение
+    )
+
+    if error:
+        return f"Ошибка: {error}"
+
+    # Парсим очищенное выражение
+    parsed_expression, local_dict = parse_user_input(clean_expr)
+
     print(f"Parsed expression for solving: {parsed_expression}")
-    return solve_equation(parsed_expression, local_dict=local_dict)
+    print(f"Variable: {variable}")
+
+    # Передаём найденную переменную (может быть None)
+    return solve_equation(parsed_expression, variable, local_dict=local_dict)
 
 
 def derivative_expression(expression: str):
@@ -322,7 +364,7 @@ def compute_residue(expression: str):
 def simplify_expression(expression: str):
     parsed_expression, local_dict = parse_user_input(expression)
     print(f"Parsed expression for simplify: {parsed_expression}")
-    return simplify_func(parsed_expression, local_dict=local_dict)
+    return factor_func(simplify_func(parsed_expression, local_dict=local_dict))
 
 
 def expand_expression(expression: str):

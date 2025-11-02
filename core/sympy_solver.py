@@ -1,7 +1,7 @@
 import numpy as np
 import sympy
 import re
-from sympy import symbols, sympify, Eq, solve, nsolve, SympifyError, diff
+from sympy import symbols, sympify, Eq, solve, nsolve, SympifyError, diff, simplify
 from sympy.abc import (
     a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
 )
@@ -292,34 +292,34 @@ def _solve_numerically_extended(expr, var, precision=15):
 # ============================================================================
 
 @log_call
-def solve_equation(equation: str, variable: str = 'x', local_dict=None, numeric_guesses=None, precision=15):
+def solve_equation(equation: str, variable: str = None, local_dict=None, numeric_guesses=None, precision=15):
     """
     Решает алгебраическое уравнение или выражение.
 
-    Алгоритм:
-    1. Если нет переменной - просто вычисляет значение выражения
-    2. Пытается символьное решение через solve()
-    3. Если не получилось - базовое численное решение (21 точка)
-    4. Если не получилось И уравнение сложное - расширенное численное решение (200+ точек)
-
     :param equation: Строка с уравнением или выражением (expr = 0)
-    :param variable: Переменная для решения
+    :param variable: Переменная для решения (если None - будет автоопределена)
     :param local_dict: Локальный словарь для пользовательских функций и констант
     :param numeric_guesses: Список стартовых значений для численного решения (опционально)
-    :param precision: Количество знаков после запятой (по умолчанию 15, как в Wolfram Alpha)
+    :param precision: Количество знаков после запятой (по умолчанию 15)
     :return: Список решений или значение выражения
     """
     if not equation:
         return []
 
     local_dict = local_dict or {}
+
+    # Если переменная не указана, используем 'x' по умолчанию
+    # (автоопределение уже сделано в extract_variable)
+    if variable is None:
+        variable = 'x'
+
     var = symbols(variable)
 
     # ========================================================================
     # ШАГ 1: Парсинг уравнения
     # ========================================================================
     if '=' in equation:
-        left_side, right_side = equation.sympylit('=', 1)
+        left_side, right_side = equation.split('=', 1)
     else:
         left_side, right_side = equation, '0'
 
@@ -331,28 +331,46 @@ def solve_equation(equation: str, variable: str = 'x', local_dict=None, numeric_
     # ШАГ 2: Проверка наличия переменной
     # ========================================================================
     if var not in expr.free_symbols:
-        # Это не уравнение, а просто выражение - вычисляем его
+        # Это не уравнение с переменной - вычисляем значение
         try:
             result = expr.evalf()
-            return result
+            # Проверка на тождество или противоречие
+            if abs(result) < 1e-10:
+                return "Тождество: уравнение верно для любого значения переменной"
+            else:
+                # Противоречие (например 5 = 0)
+                return []
         except:
             return expr
 
     # ========================================================================
-    # ШАГ 3: Символьное решение (для простых уравнений)
+    # ШАГ 3: Проверка на тождество (x = x) или противоречие (x + 1 = x)
+    # ========================================================================
+    try:
+        simplified_expr = simplify(expr)
+
+        if simplified_expr == 0 or (hasattr(simplified_expr, 'is_zero') and simplified_expr.is_zero):
+            return "Тождество: уравнение верно для любого значения переменной"
+
+        if simplified_expr.is_number and simplified_expr != 0:
+            return []
+    except:
+        pass
+
+    # ========================================================================
+    # ШАГ 4: Символьное решение
     # ========================================================================
     try:
         solutions = solve(Eq(lhs, rhs), var)
         if solutions and isinstance(solutions, list) and len(solutions) > 0:
             return solutions
     except Exception:
-        pass  # Переходим к численному решению
+        pass
 
     # ========================================================================
-    # ШАГ 4: Базовое численное решение (для уравнений средней сложности)
+    # ШАГ 5-6: Численное решение
     # ========================================================================
     if numeric_guesses is not None:
-        # Если пользователь задал свои начальные точки - используем их
         valid_guesses = _get_valid_guesses(expr, var, numeric_guesses)
         numeric_solutions = set()
 
@@ -370,24 +388,17 @@ def solve_equation(equation: str, variable: str = 'x', local_dict=None, numeric_
         if numeric_solutions:
             return sorted(numeric_solutions)
     else:
-        # Стандартное базовое численное решение
         numeric_solutions = _solve_numerically_basic(expr, var, num_points=21, precision=precision)
 
         if numeric_solutions:
             return sorted(numeric_solutions)
 
-    # ========================================================================
-    # ШАГ 5: Расширенное численное решение (для сложных трансцендентных уравнений)
-    # ========================================================================
     if _is_equation_complex(expr):
         numeric_solutions = _solve_numerically_extended(expr, var, precision=precision)
 
         if numeric_solutions:
             return sorted(numeric_solutions)
 
-    # ========================================================================
-    # Если ничего не помогло
-    # ========================================================================
     return f"Не удалось найти решения для: {equation}"
 
 
@@ -395,55 +406,55 @@ def solve_equation(equation: str, variable: str = 'x', local_dict=None, numeric_
 # ОБНОВЛЕННАЯ ФУНКЦИЯ derivative_expression
 # ============================================
 
-@log_call
-def derivative_expression(expression: str):
-    """
-    Обёртка для вычисления производной с предобработкой выражения.
-    Извлекает переменную из "at <var>" или "по <var>" ДО парсинга.
-
-    :param expression: Строка типа "at y 4x + 1y" или "по x x**2 + y"
-    :return: Строковое представление производной
-    """
-    if not expression:
-        return "Пустое выражение"
-
-    # ШАГ 1: Извлекаем переменную ДО парсинга
-    variable = None
-    clean_expr = expression
-
-    # Ищем "at <variable>" (английский) - должно быть отдельным словом
-    match_en = re.search(r'\bat\s+([a-zA-Z])\b', expression, re.IGNORECASE)
-    if match_en:
-        variable = match_en.group(1)
-        # Убираем "at <variable>" из строки
-        clean_expr = re.sub(r'\bat\s+[a-zA-Z]\b', '', expression, flags=re.IGNORECASE).strip()
-
-    # Ищем "по <variable>" (русский)
-    match_ru = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression, re.IGNORECASE)
-    if match_ru:
-        variable = match_ru.group(1)
-        # Убираем "по <variable>" из строки
-        clean_expr = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression, flags=re.IGNORECASE).strip()
-
-    print(f"Original expression: {expression}")
-    print(f"Cleaned expression: {clean_expr}")
-    print(f"Extracted variable: {variable}")
-
-    # ШАГ 2: Теперь парсим очищенное выражение (без "at y" или "по x")
-    parsed_expr, local_dict = parse_user_input(clean_expr)
-
-    # ШАГ 3: Вызываем основную функцию derivative
-    try:
-        # Если переменная была извлечена, добавляем её обратно в формате "по <var>"
-        if variable:
-            expr_with_var = f"{parsed_expr} по {variable}"
-        else:
-            expr_with_var = parsed_expr
-
-        result = derivative(expr_with_var, local_dict=local_dict)
-        return str(result)
-    except Exception as e:
-        return f"Ошибка: {e}"
+#@log_call
+#def derivative_expression(expression: str):
+#    """
+#    Обёртка для вычисления производной с предобработкой выражения.
+#    Извлекает переменную из "at <var>" или "по <var>" ДО парсинга.
+#
+#    :param expression: Строка типа "at y 4x + 1y" или "по x x**2 + y"
+#    :return: Строковое представление производной
+#    """
+#    if not expression:
+#        return "Пустое выражение"
+#
+#    # ШАГ 1: Извлекаем переменную ДО парсинга
+#    variable = None
+#    clean_expr = expression
+#
+#    # Ищем "at <variable>" (английский) - должно быть отдельным словом
+#    match_en = re.search(r'\bat\s+([a-zA-Z])\b', expression, re.IGNORECASE)
+#    if match_en:
+#        variable = match_en.group(1)
+#        # Убираем "at <variable>" из строки
+#        clean_expr = re.sub(r'\bat\s+[a-zA-Z]\b', '', expression, flags=re.IGNORECASE).strip()
+#
+#    # Ищем "по <variable>" (русский)
+#    match_ru = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression, re.IGNORECASE)
+#    if match_ru:
+#        variable = match_ru.group(1)
+#        # Убираем "по <variable>" из строки
+#        clean_expr = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression, flags=re.IGNORECASE).strip()
+#
+#    print(f"Original expression: {expression}")
+#    print(f"Cleaned expression: {clean_expr}")
+#    print(f"Extracted variable: {variable}")
+#
+#    # ШАГ 2: Теперь парсим очищенное выражение (без "at y" или "по x")
+#    parsed_expr, local_dict = parse_user_input(clean_expr)
+#
+#    # ШАГ 3: Вызываем основную функцию derivative
+#    try:
+#        # Если переменная была извлечена, добавляем её обратно в формате "по <var>"
+#        if variable:
+#            expr_with_var = f"{parsed_expr} по {variable}"
+#        else:
+#            expr_with_var = parsed_expr
+#
+#        result = derivative(expr_with_var, local_dict=local_dict)
+#        return str(result)
+#    except Exception as e:
+#        return f"Ошибка: {e}"
 
 
 # ============================================
