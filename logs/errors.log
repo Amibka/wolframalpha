@@ -578,3 +578,321 @@ Traceback (most recent call last):
                      % (norm(f(*xl))**2, tol))
 ValueError: Could not find root within given tolerance. (42.8007267428028707322 > 2.16840434497100886801e-19)
 Try another starting point or tweak arguments.
+2025-11-02 20:33:07 | ERROR    | wolfram_pyqt | Ошибка в derivative: Некорректное выражение: от sin(x)
+ValueError: Error from parse_expr with transformed code: "Symbol ('от' )sin (Symbol ('x' ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('от' )sin (Symbol ('x' ))
+                  ^^^
+SyntaxError: invalid syntax. Did you mean 'in'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 493, in derivative
+    expr = sympify(expression, locals=local_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'от sin(x)'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 495, in derivative
+    raise ValueError(f"Некорректное выражение: {expression}")
+ValueError: Некорректное выражение: от sin(x)
+2025-11-02 20:33:37 | ERROR    | wolfram_pyqt | Ошибка в derivative: Некорректное выражение: от sin(x)
+ValueError: Error from parse_expr with transformed code: "Symbol ('от' )sin (Symbol ('x' ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('от' )sin (Symbol ('x' ))
+                  ^^^
+SyntaxError: invalid syntax. Did you mean 'in'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 493, in derivative
+    expr = sympify(expression, locals=local_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'от sin(x)'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 495, in derivative
+    raise ValueError(f"Некорректное выражение: {expression}")
+ValueError: Некорректное выражение: от sin(x)
+2025-11-02 23:59:45 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse 'производна sin(x)'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('производна' )sin (Symbol ('x' ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('производна' )sin (Symbol ('x' ))
+                          ^^^
+SyntaxError: invalid syntax. Did you mean 'in'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 326, in solve_equation
+    lhs = sympify(left_side, locals=local_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'производна sin(x)'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-11-03 00:31:40 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse 'ть sin(x) '' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('ть' )sin (Symbol ('x' ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('ть' )sin (Symbol ('x' ))
+                  ^^^
+SyntaxError: invalid syntax. Did you mean 'in'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 326, in solve_equation
+    lhs = sympify(left_side, locals=local_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'ть sin(x) '' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-11-03 00:33:19 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse 'ть sin(x) '' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+ValueError: Error from parse_expr with transformed code: "Symbol ('ть' )sin (Symbol ('x' ))"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1090, in parse_expr
+    raise e from ValueError(f"Error from parse_expr with transformed code: {code!r}")
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1081, in parse_expr
+    rv = eval_expr(code, local_dict, global_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 905, in eval_expr
+    expr = eval(
+        code, global_dict, local_dict)  # take local objects in preference
+  File "<string>", line 1
+    Symbol ('ть' )sin (Symbol ('x' ))
+                  ^^^
+SyntaxError: invalid syntax. Did you mean 'in'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 326, in solve_equation
+    lhs = sympify(left_side, locals=local_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse 'ть sin(x) '' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+2025-11-03 00:40:07 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse '((cos(x))**2 - 1/2 * (sin(x)**2))/((sqrt(cos(x)) * t*g(x/8 - pi/32))'' failed, because of exception being raised:
+TokenError: ('unexpected EOF in multi-line statement', (1, 0))
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1075, in parse_expr
+    code = stringify_expr(s, local_dict, global_dict, _transformations)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 890, in stringify_expr
+    for toknum, tokval, _, _, _ in generate_tokens(input_code.readline):
+                                   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Python versions\Lib\tokenize.py", line 588, in _generate_tokens_from_c_tokenizer
+    raise TokenError(msg, (e.lineno, e.offset)) from None
+tokenize.TokenError: ('unexpected EOF in multi-line statement', (1, 0))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 326, in solve_equation
+    lhs = sympify(left_side, locals=local_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse '((cos(x))**2 - 1/2 * (sin(x)**2))/((sqrt(cos(x)) * t*g(x/8 - pi/32))'' failed, because of exception being raised:
+TokenError: ('unexpected EOF in multi-line statement', (1, 0))
+2025-11-03 00:41:16 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: Sympify of expression 'could not parse '((cos(x))**2 - 1/2 * (sin(x)**2))/((sqrt(cos(x)) * tg(x/8 - pi/32))'' failed, because of exception being raised:
+TokenError: ('unexpected EOF in multi-line statement', (1, 0))
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 507, in sympify
+    expr = parse_expr(a, local_dict=locals, transformations=transformations, evaluate=evaluate)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 1075, in parse_expr
+    code = stringify_expr(s, local_dict, global_dict, _transformations)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\parsing\sympy_parser.py", line 890, in stringify_expr
+    for toknum, tokval, _, _, _ in generate_tokens(input_code.readline):
+                                   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Python versions\Lib\tokenize.py", line 588, in _generate_tokens_from_c_tokenizer
+    raise TokenError(msg, (e.lineno, e.offset)) from None
+tokenize.TokenError: ('unexpected EOF in multi-line statement', (1, 0))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 326, in solve_equation
+    lhs = sympify(left_side, locals=local_dict)
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\sympy\core\sympify.py", line 509, in sympify
+    raise SympifyError('could not parse %r' % a, exc)
+sympy.core.sympify.SympifyError: Sympify of expression 'could not parse '((cos(x))**2 - 1/2 * (sin(x)**2))/((sqrt(cos(x)) * tg(x/8 - pi/32))'' failed, because of exception being raised:
+TokenError: ('unexpected EOF in multi-line statement', (1, 0))
+2025-11-03 00:57:46 | ERROR    | wolfram_pyqt | Ошибка в on_enter_pressed: No module named 'matplotlib'
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\handlers\event_handler.py", line 34, in on_enter_pressed
+    output_widget.display_result(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "F:\Pycharm\wolframalpha\ui\interface.py", line 33, in display_result
+    from utils.math_renderer import create_math_image
+  File "F:\Pycharm\wolframalpha\utils\math_renderer.py", line 2, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\handlers\event_handler.py", line 47, in on_enter_pressed
+    output_widget.display_result(error_msg)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "F:\Pycharm\wolframalpha\ui\interface.py", line 33, in display_result
+    from utils.math_renderer import create_math_image
+  File "F:\Pycharm\wolframalpha\utils\math_renderer.py", line 2, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+2025-11-03 13:05:54 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: module 'numpy' has no attribute 'linsympyace'
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 391, in solve_equation
+    numeric_solutions = _solve_numerically_basic(expr, var, num_points=21, precision=precision)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 242, in _solve_numerically_basic
+    guesses = list(np.linsympyace(-10, 10, num_points))
+                   ^^^^^^^^^^^^^^
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\numpy\__init__.py", line 808, in __getattr__
+    raise AttributeError(f"module {__name__!r} has no attribute {attr!r}")
+AttributeError: module 'numpy' has no attribute 'linsympyace'. Did you mean: 'linspace'?
+2025-11-03 13:07:12 | ERROR    | wolfram_pyqt | Ошибка в solve_equation: module 'numpy' has no attribute 'linsympyace'
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 391, in solve_equation
+    numeric_solutions = _solve_numerically_basic(expr, var, num_points=21, precision=precision)
+  File "F:\Pycharm\wolframalpha\core\sympy_solver.py", line 242, in _solve_numerically_basic
+    guesses = list(np.linsympyace(-10, 10, num_points))
+                   ^^^^^^^^^^^^^^
+  File "F:\Pycharm\wolframalpha\.venv1\Lib\site-packages\numpy\__init__.py", line 808, in __getattr__
+    raise AttributeError(f"module {__name__!r} has no attribute {attr!r}")
+AttributeError: module 'numpy' has no attribute 'linsympyace'. Did you mean: 'linspace'?
+2025-11-04 11:54:02 | ERROR    | wolfram_pyqt | Ошибка в get_text: Illegal trailing comma before end of array: line 199 column 32 (char 3298)
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\parser.py", line 978, in get_text
+    router = CommandRouter()
+  File "F:\Pycharm\wolframalpha\core\parser.py", line 626, in __init__
+    self.command_translate = json.load(f)
+                             ~~~~~~~~~^^^
+  File "F:\Python versions\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+        cls=cls, object_hook=object_hook,
+        parse_float=parse_float, parse_int=parse_int,
+        parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "F:\Python versions\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "F:\Python versions\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Python versions\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Illegal trailing comma before end of array: line 199 column 32 (char 3298)
+2025-11-04 11:54:33 | ERROR    | wolfram_pyqt | Ошибка в get_text: Illegal trailing comma before end of array: line 199 column 32 (char 3298)
+Traceback (most recent call last):
+  File "F:\Pycharm\wolframalpha\logs\logger.py", line 59, in wrapper
+    result = func(*args, **kwargs)
+  File "F:\Pycharm\wolframalpha\core\parser.py", line 978, in get_text
+    router = CommandRouter()
+  File "F:\Pycharm\wolframalpha\core\parser.py", line 626, in __init__
+    self.command_translate = json.load(f)
+                             ~~~~~~~~~^^^
+  File "F:\Python versions\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+        cls=cls, object_hook=object_hook,
+        parse_float=parse_float, parse_int=parse_int,
+        parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "F:\Python versions\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "F:\Python versions\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Python versions\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Illegal trailing comma before end of array: line 199 column 32 (char 3298)

@@ -26,7 +26,7 @@ actions = [
     "Poly", "degree", "factor_list", "discriminant", "nroots",
 
     # Дифференциальные операторы / интегралы
-    "derivative", "gradient", "laplacian", "Integral",
+    "derivative", "gradient", "laplacian", "integral",
 
     # Пределы / ряды
     "limit", "series", "removeO",
@@ -40,7 +40,7 @@ actions = [
 
 actions_ru = [
     # Уравнения / корни
-    "решить", "нрешить", "решение", "корни",
+    "решить", "решение", "корни",
 
     # Алгебра / упрощение
     "упростить", "разложить", "раскрыть", "собрать", "сократить", "объединить", "разделить",

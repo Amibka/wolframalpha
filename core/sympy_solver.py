@@ -1,7 +1,7 @@
 import numpy as np
 import sympy
 import re
-from sympy import symbols, sympify, Eq, solve, nsolve, SympifyError, diff, simplify
+from sympy import symbols, sympify, Eq, solve, nsolve, diff, simplify, Integral, Symbol, oo, limit
 from sympy.abc import (
     a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
 )
@@ -9,98 +9,19 @@ from sympy.abc import (
 from logs.logger import log_call
 
 
-def find_root_nsolve(equation_str, variable='x', scan_range=(-5, 5), scan_step=0.01):
-    x = sympy.symbols(variable)
-
-    # Преобразуем строку в символьное выражение
-    expr = sympy.sympify(equation_str)
-
-    # Лямбда для быстрого вычисления значений
-    f = sympy.lambdify(x, expr, 'numpy')
-
-    # Сканируем диапазон для поиска изменения знака
-    xs = np.arange(scan_range[0], scan_range[1], scan_step)
-    x0 = None
-    for xi, xi_next in zip(xs, xs[1:]):
-        try:
-            val_i = f(xi)
-            val_next = f(xi_next)
-            if np.isnan(val_i) or np.isnan(val_next) or np.isinf(val_i) or np.isinf(val_next):
-                continue
-            if val_i * val_next < 0:
-                x0 = (xi + xi_next) / 2  # берем середину интервала
-                break
-        except:
-            continue
-
-    if x0 is None:
-        raise ValueError("Не удалось найти стартовое x0. Попробуйте увеличить диапазон scan_range.")
-
-    # Используем nsolve для численного решения
-    try:
-        root = sympy.nsolve(expr, x, x0)
-        return float(root)
-    except Exception as e:
-        raise ValueError(f"nsolve не смог найти корень: {e}")
-
-
-def smart_nsolve(expr_str, variable='x', local_dict=None, guesses=None):
-    """
-    Численно решает уравнение, перебирая несколько стартовых значений.
-
-    :param expr_str: Строка с уравнением (expr = 0)
-    :param variable: Переменная для решения
-    :param local_dict: Локальные функции/константы
-    :param guesses: Список стартовых значений для nsolve
-    :return: Список найденных численных решений
-    """
-    local_dict = local_dict or {}
-    var = symbols(variable)
-    expr = sympify(expr_str, locals=local_dict)
-
-    # Если нет стартовых значений, используем диапазон от -10 до 10
-    if guesses is None:
-        guesses = np.linsympyace(-10, 10, 21)  # 21 точка
-
-    solutions = set()
-
-    for g in guesses:
-        try:
-            sol = nsolve(expr, var, g)
-            # округляем до 15 знаков, чтобы убрать почти одинаковые решения
-            sol = round(float(sol), 15)
-            solutions.add(sol)
-        except Exception:
-            continue
-
-    return sorted(solutions)
-
-
 # ============================================================================
 # ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ЧИСЛЕННОГО РЕШЕНИЯ
 # ============================================================================
 
 def _is_equation_complex(expr):
-    """
-    Определяет, является ли уравнение сложным (содержит трансцендентные функции).
-
-    :param expr: Символьное выражение SymPy
-    :return: True если уравнение сложное, False если простое
-    """
+    """Определяет, содержит ли уравнение трансцендентные функции"""
     expr_str = str(expr)
-    transcendental_functions = ['log', 'exp', 'sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'sinh', 'cosh', 'tanh']
-    return any(func in expr_str for func in transcendental_functions)
+    transcendental = ['log', 'exp', 'sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'sinh', 'cosh', 'tanh']
+    return any(func in expr_str for func in transcendental)
 
 
 def _find_domain_boundaries(expr, var):
-    """
-    Пытается определить границы области определения функции.
-    Ищет точки разрыва (деление на ноль, логарифмы отрицательных чисел и т.д.)
-
-    :param expr: Символьное выражение
-    :param var: Переменная
-    :return: Список критических точек (границ области определения)
-    """
+    """Находит границы области определения функции"""
     critical_points = set()
 
     # Ищем знаменатели
@@ -119,17 +40,17 @@ def _find_domain_boundaries(expr, var):
     # Находим нули знаменателей
     for denom in denominators:
         try:
-            zeros = sympy.solve(denom, var)
+            zeros = solve(denom, var)
             for z in zeros:
                 if z.is_real:
                     critical_points.add(float(z))
         except:
             pass
 
-    # Находим точки, где аргументы логарифмов становятся <= 0
+    # Находим точки, где аргументы логарифмов <= 0
     for log_arg in log_args:
         try:
-            zeros = sympy.solve(log_arg, var)
+            zeros = solve(log_arg, var)
             for z in zeros:
                 if z.is_real:
                     critical_points.add(float(z))
@@ -140,19 +61,10 @@ def _find_domain_boundaries(expr, var):
 
 
 def _get_valid_guesses(expr, var, guesses):
-    """
-    Фильтрует начальные точки, оставляя только те, где функция определена.
-
-    :param expr: Символьное выражение
-    :param var: Переменная
-    :param guesses: Список начальных значений
-    :return: Список валидных начальных значений
-    """
+    """Фильтрует начальные точки, где функция определена"""
     try:
-        # Подавляем warnings от numpy
         import warnings
         warnings.filterwarnings('ignore', category=RuntimeWarning)
-
         f = sympy.lambdify(var, expr, 'numpy')
     except:
         return guesses
@@ -170,76 +82,48 @@ def _get_valid_guesses(expr, var, guesses):
 
 
 def _verify_solution(expr, var, sol_float):
-    """
-    Проверяет, является ли найденное решение действительным корнем уравнения.
-
-    :param expr: Символьное выражение
-    :param var: Переменная
-    :param sol_float: Найденное решение
-    :return: True если решение верное, False если нет
-    """
+    """Проверяет, является ли найденное решение корнем"""
     try:
         import warnings
         warnings.filterwarnings('ignore', category=RuntimeWarning)
-
         f = sympy.lambdify(var, expr, 'numpy')
         check_val = abs(f(sol_float))
-        return check_val <= 0.01  # допустимая погрешность
+        return check_val <= 0.01
     except:
-        return True  # если не можем проверить, считаем что верно
+        return True
 
 
 def _generate_smart_guesses(expr, var):
-    """
-    Генерирует умные начальные точки для поиска корней,
-    учитывая область определения функции.
-
-    :param expr: Символьное выражение
-    :param var: Переменная
-    :return: Список начальных точек
-    """
-    # Находим критические точки (границы области определения)
+    """Генерирует умные начальные точки с учетом области определения"""
     critical_points = _find_domain_boundaries(expr, var)
-
     guesses = []
 
     if not critical_points:
-        # Если нет критических точек, используем широкий диапазон
-        guesses = list(np.linsympyace(-100, 100, 201))
+        guesses = list(np.linspace(-100, 100, 201))
     else:
-        # Генерируем точки в каждом интервале между критическими точками
         sorted_critical = sorted(critical_points)
 
         # Слева от первой критической точки
         if sorted_critical[0] > -100:
-            guesses.extend(np.linsympyace(-100, sorted_critical[0] - 0.1, 20))
+            guesses.extend(np.linspace(-100, sorted_critical[0] - 0.1, 20))
 
         # Между критическими точками
         for i in range(len(sorted_critical) - 1):
             left = sorted_critical[i] + 0.1
             right = sorted_critical[i + 1] - 0.1
             if right > left:
-                guesses.extend(np.linsympyace(left, right, 20))
+                guesses.extend(np.linspace(left, right, 20))
 
         # Справа от последней критической точки
         if sorted_critical[-1] < 100:
-            guesses.extend(np.linsympyace(sorted_critical[-1] + 0.1, 100, 20))
+            guesses.extend(np.linspace(sorted_critical[-1] + 0.1, 100, 20))
 
     return guesses
 
 
 def _solve_numerically_basic(expr, var, num_points=21, precision=15):
-    """
-    Базовое численное решение с ограниченным набором начальных точек.
-    Используется для простых уравнений.
-
-    :param expr: Символьное выражение
-    :param var: Переменная
-    :param num_points: Количество начальных точек для перебора
-    :param precision: Количество знаков после запятой (по умолчанию 15)
-    :return: Множество найденных решений
-    """
-    guesses = list(np.linsympyace(-10, 10, num_points))
+    """Базовое численное решение"""
+    guesses = list(np.linspace(-10, 10, num_points))
     valid_guesses = _get_valid_guesses(expr, var, guesses)
 
     solutions = set()
@@ -258,18 +142,8 @@ def _solve_numerically_basic(expr, var, num_points=21, precision=15):
 
 
 def _solve_numerically_extended(expr, var, precision=15):
-    """
-    Расширенное численное решение с большим количеством начальных точек.
-    Используется для сложных трансцендентных уравнений.
-
-    :param expr: Символьное выражение
-    :param var: Переменная
-    :param precision: Количество знаков после запятой (по умолчанию 15)
-    :return: Множество найденных решений
-    """
-    # Используем умную генерацию начальных точек с учетом области определения
+    """Расширенное численное решение для сложных уравнений"""
     extended_guesses = _generate_smart_guesses(expr, var)
-
     valid_guesses = _get_valid_guesses(expr, var, extended_guesses)
 
     solutions = set()
@@ -294,82 +168,97 @@ def _solve_numerically_extended(expr, var, precision=15):
 @log_call
 def solve_equation(equation: str, variable: str = None, local_dict=None, numeric_guesses=None, precision=15):
     """
-    Решает алгебраическое уравнение или выражение.
+    Решает алгебраическое уравнение
 
-    :param equation: Строка с уравнением или выражением (expr = 0)
-    :param variable: Переменная для решения (если None - будет автоопределена)
-    :param local_dict: Локальный словарь для пользовательских функций и констант
-    :param numeric_guesses: Список стартовых значений для численного решения (опционально)
-    :param precision: Количество знаков после запятой (по умолчанию 15)
-    :return: Список решений или значение выражения
+    :param equation: Строка с уравнением (expr = 0 или expr)
+    :param variable: Переменная для решения
+    :param local_dict: Локальный словарь для sympify
+    :param numeric_guesses: Список стартовых значений для численного решения
+    :param precision: Точность округления (знаков после запятой)
+    :return: Список решений
     """
     if not equation:
         return []
 
     local_dict = local_dict or {}
 
-    # Если переменная не указана, используем 'x' по умолчанию
-    # (автоопределение уже сделано в extract_variable)
     if variable is None:
         variable = 'x'
 
     var = symbols(variable)
 
-    # ========================================================================
-    # ШАГ 1: Парсинг уравнения
-    # ========================================================================
+    # Парсинг уравнения
     if '=' in equation:
         left_side, right_side = equation.split('=', 1)
     else:
         left_side, right_side = equation, '0'
 
-    lhs = sympify(left_side, locals=local_dict)
-    rhs = sympify(right_side, locals=local_dict)
-    expr = lhs - rhs
+    try:
+        lhs = sympify(left_side, locals=local_dict)
+        rhs = sympify(right_side, locals=local_dict)
+        expr = lhs - rhs
+    except Exception as e:
+        return f"Ошибка парсинга: {e}"
 
-    # ========================================================================
-    # ШАГ 2: Проверка наличия переменной
-    # ========================================================================
+    # Проверка наличия переменной
     if var not in expr.free_symbols:
-        # Это не уравнение с переменной - вычисляем значение
         try:
             result = expr.evalf()
-            # Проверка на тождество или противоречие
             if abs(result) < 1e-10:
                 return "Тождество: уравнение верно для любого значения переменной"
             else:
-                # Противоречие (например 5 = 0)
                 return []
         except:
             return expr
 
-    # ========================================================================
-    # ШАГ 3: Проверка на тождество (x = x) или противоречие (x + 1 = x)
-    # ========================================================================
+    # Проверка на тождество/противоречие
     try:
         simplified_expr = simplify(expr)
 
         if simplified_expr == 0 or (hasattr(simplified_expr, 'is_zero') and simplified_expr.is_zero):
-            return "Тождество: уравнение верно для любого значения переменной"
+            return True  # ИЗМЕНЕНО: возвращаем True вместо строки
 
         if simplified_expr.is_number and simplified_expr != 0:
             return []
     except:
         pass
 
-    # ========================================================================
-    # ШАГ 4: Символьное решение
-    # ========================================================================
+    # Символьное решение
     try:
         solutions = solve(Eq(lhs, rhs), var)
         if solutions and isinstance(solutions, list) and len(solutions) > 0:
-            return solutions
+            # Упрощаем каждое решение
+            simplified = []
+            for sol in solutions:
+                # Заменяем log(e) -> 1 и log(E) -> 1
+                sol = sol.subs(sympy.log(sympy.E), 1)
+                sol = sol.subs(sympy.log(sympy.exp(1)), 1)
+
+                # Упрощаем
+                simplified_sol = sympy.simplify(sol)
+
+                # Пытаемся развернуть логарифмы
+                try:
+                    expanded = sympy.expand_log(simplified_sol, force=True)
+                    if expanded != simplified_sol:
+                        simplified_sol = sympy.simplify(expanded)
+                except:
+                    pass
+
+                # Вычисляем числовые значения
+                try:
+                    if simplified_sol.is_number:
+                        computed = sympy.nsimplify(simplified_sol)
+                        simplified.append(computed)
+                    else:
+                        simplified.append(simplified_sol)
+                except:
+                    simplified.append(simplified_sol)
+            return simplified
     except Exception:
         pass
 
-    # ========================================================================
-    # ШАГ 5-6: Численное решение
-    # ========================================================================
+    # Численное решение с пользовательскими точками
     if numeric_guesses is not None:
         valid_guesses = _get_valid_guesses(expr, var, numeric_guesses)
         numeric_solutions = set()
@@ -388,11 +277,13 @@ def solve_equation(equation: str, variable: str = None, local_dict=None, numeric
         if numeric_solutions:
             return sorted(numeric_solutions)
     else:
+        # Базовое численное решение
         numeric_solutions = _solve_numerically_basic(expr, var, num_points=21, precision=precision)
 
         if numeric_solutions:
             return sorted(numeric_solutions)
 
+    # Расширенное численное решение для сложных уравнений
     if _is_equation_complex(expr):
         numeric_solutions = _solve_numerically_extended(expr, var, precision=precision)
 
@@ -402,40 +293,35 @@ def solve_equation(equation: str, variable: str = None, local_dict=None, numeric
     return f"Не удалось найти решения для: {equation}"
 
 
-# ============================================
-# ОБНОВЛЕННАЯ ФУНКЦИЯ derivative
-# ============================================
+# ============================================================================
+# ПРОИЗВОДНАЯ
+# ============================================================================
 
 @log_call
 def derivative(expression: str, local_dict=None):
     """
-    Вычисляет производную заданного выражения по указанной переменной.
-    Автораспознаёт переменную, если указано 'по <variable>' в строке.
-    Если переменная не указана и в выражении одна переменная, берётся она автоматически.
+    Вычисляет производную по указанной переменной
 
-    :param expression: Строковое представление выражения, например:
-                       "4*x + 1*y по x"
-                       "x**2 + 3*x + 2 по x"
-    :param local_dict: Словарь доступных функций и констант для sympy.
-    :return: Производная выражения.
+    :param expression: "expr по x" или просто "expr"
+    :param local_dict: Локальный словарь
+    :return: Производная
     """
     if not expression:
         return None
 
-    # Ищем ключевое слово "по <variable>"
-    match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression, re.IGNORECASE)
+    # Ищем "по <variable>"
+    match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression, re.I)
     if match:
         variable = match.group(1)
-        # Убираем 'по <variable>' из строки
-        expression = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression, flags=re.IGNORECASE).strip()
+        expression = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression, flags=re.I).strip()
     else:
         variable = None
 
-    # Преобразуем строку в символьное выражение
+    # Парсим выражение
     try:
         expr = sympify(expression, locals=local_dict)
-    except SympifyError:
-        raise ValueError(f"Некорректное выражение: {expression}")
+    except Exception as e:
+        return f"Ошибка парсинга: {e}"
 
     # Определяем переменную
     free_vars = list(expr.free_symbols)
@@ -446,10 +332,7 @@ def derivative(expression: str, local_dict=None):
         elif len(free_vars) == 0:
             return 0
         else:
-            raise ValueError(
-                f"Несколько переменных в выражении: {free_vars}. "
-                f"Укажите явно через 'по <variable>' или 'at <variable>'"
-            )
+            return f"Несколько переменных: {free_vars}. Укажите через 'по x'"
     else:
         var = symbols(variable)
 
@@ -459,23 +342,85 @@ def derivative(expression: str, local_dict=None):
     return derivative_expr
 
 
+# ============================================================================
+# ВЫЧЕТ
+# ============================================================================
+
+@log_call
 def calculation_residue(expression: str, variable: str = 'x', local_dict=None):
+    """
+    Вычисляет вычет функции в точке
+    Формат: "функция по переменная в точка"
+    """
     pattern = r'(.+?)\s+по\s+(\w+)\s+в\s+(.+)'
     match = re.match(pattern, expression.strip(), re.I)
+
     if not match:
-        raise ValueError("Неправильный формат. Нужно: <функция> по <переменная> в <точка>")
+        return "Ошибка: формат должен быть 'функция по переменная в точка'"
 
     func_str = match.group(1)
     var_str = match.group(2)
     point_str = match.group(3)
 
-    # преобразуем строки в SymPy
-    f = sympify(func_str, locals=local_dict)
-    var = symbols(var_str)
-    pt = sympify(point_str, locals=local_dict)
+    try:
+        f = sympify(func_str, locals=local_dict)
+        var = symbols(var_str)
+        pt = sympify(point_str, locals=local_dict)
 
-    return sympy.residue(f, var, pt)
+        return sympy.residue(f, var, pt)
+    except Exception as e:
+        return f"Ошибка вычисления вычета: {e}"
 
+
+# ============================================================================
+# ИНТЕГРИРОВАНИЕ
+# ============================================================================
+
+@log_call
+def integrate_func(integral_or_expr, local_dict=None):
+    """
+    Вычисляет интеграл
+
+    :param integral_or_expr: Либо Integral объект, либо выражение
+    :param local_dict: Локальный словарь
+    :return: Результат интегрирования
+    """
+    if isinstance(integral_or_expr, Integral):
+        # Если это объект Integral, просто вычисляем
+        try:
+            result = integral_or_expr.doit()
+            return result
+        except Exception as e:
+            return f"Ошибка интегрирования: {e}"
+    else:
+        # Если это строка или выражение
+        try:
+            if isinstance(integral_or_expr, str):
+                expr = sympify(integral_or_expr, locals=local_dict)
+            else:
+                expr = integral_or_expr
+
+            # Ищем все Integral в выражении
+            integrals = list(expr.atoms(Integral))
+
+            if not integrals:
+                # Нет интегралов - возвращаем как есть
+                return expr
+
+            # Вычисляем каждый интеграл
+            for integral in integrals:
+                computed = integral.doit()
+                expr = expr.xreplace({integral: computed})
+
+            return expr
+
+        except Exception as e:
+            return f"Ошибка интегрирования: {e}"
+
+
+# ============================================================================
+# ПРОСТЫЕ ФУНКЦИИ УПРОЩЕНИЯ
+# ============================================================================
 
 @log_call
 def simplify_func(expression: str, local_dict=None):
@@ -521,15 +466,15 @@ def collect_func(expression: str, local_dict=None):
         var_name = match.group(1)
         expression = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression).strip()
     else:
-        # Автоопределение: берём первую переменную
+        # Автоопределение
         expr = sympify(expression, locals=local_dict)
         free_vars = list(expr.free_symbols)
         if len(free_vars) == 0:
-            raise ValueError("Выражение не содержит переменных")
+            return "Выражение не содержит переменных"
         elif len(free_vars) == 1:
             var_name = str(free_vars[0])
         else:
-            raise ValueError(f"Несколько переменных: {free_vars}. Укажите через 'по x', 'at x', и т.д.")
+            return f"Несколько переменных: {free_vars}. Укажите через 'по x'"
 
     expr = sympify(expression, locals=local_dict)
     var = symbols(var_name)
@@ -596,9 +541,12 @@ def separatevars_func(expression: str, local_dict=None):
     return sympy.separatevars(expr)
 
 
+# ============================================================================
+# ФУНКЦИИ С НЕСКОЛЬКИМИ АРГУМЕНТАМИ
+# ============================================================================
+
 @log_call
 def gcd_func(expression: str, local_dict=None):
-    # expression = "expr1, expr2, ..."
     parts = [p.strip() for p in expression.split(',')]
     exprs = [sympify(p, locals=local_dict) for p in parts]
     return sympy.gcd(*exprs)
@@ -615,7 +563,7 @@ def lcm_func(expression: str, local_dict=None):
 def div_func(expression: str, local_dict=None):
     parts = [p.strip() for p in expression.split(',')]
     if len(parts) != 2:
-        raise ValueError("div требует ровно 2 аргумента")
+        return "Ошибка: div требует ровно 2 аргумента"
     expr1 = sympify(parts[0], locals=local_dict)
     expr2 = sympify(parts[1], locals=local_dict)
     return sympy.div(expr1, expr2)
@@ -625,7 +573,7 @@ def div_func(expression: str, local_dict=None):
 def quo_func(expression: str, local_dict=None):
     parts = [p.strip() for p in expression.split(',')]
     if len(parts) != 2:
-        raise ValueError("quo требует ровно 2 аргумента")
+        return "Ошибка: quo требует ровно 2 аргумента"
     expr1 = sympify(parts[0], locals=local_dict)
     expr2 = sympify(parts[1], locals=local_dict)
     return sympy.quo(expr1, expr2)
@@ -635,11 +583,15 @@ def quo_func(expression: str, local_dict=None):
 def rem_func(expression: str, local_dict=None):
     parts = [p.strip() for p in expression.split(',')]
     if len(parts) != 2:
-        raise ValueError("rem требует ровно 2 аргумента")
+        return "Ошибка: rem требует ровно 2 аргумента"
     expr1 = sympify(parts[0], locals=local_dict)
     expr2 = sympify(parts[1], locals=local_dict)
     return sympy.rem(expr1, expr2)
 
+
+# ============================================================================
+# ФУНКЦИИ ДЛЯ РАБОТЫ С МНОГОЧЛЕНАМИ
+# ============================================================================
 
 @log_call
 def poly_func(expression: str, local_dict=None):
@@ -648,8 +600,28 @@ def poly_func(expression: str, local_dict=None):
 
 
 @log_call
+def degree_func(expression: str, local_dict=None):
+    match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
+    if match:
+        var_name = match.group(1)
+        expression = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression).strip()
+        var = symbols(var_name)
+    else:
+        var = None
+
+    expr = sympify(expression, locals=local_dict)
+
+    try:
+        poly = sympy.Poly(expr, var) if var else sympy.Poly(expr)
+        return poly.degree()
+    except Exception as e:
+        if var is None:
+            return f"Для многочленов с несколькими переменными укажите переменную через 'по x' ({e})"
+        raise
+
+
+@log_call
 def content_func(expression: str, local_dict=None):
-    # Извлекаем переменную если указана
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
     if match:
         var_name = match.group(1)
@@ -665,7 +637,6 @@ def content_func(expression: str, local_dict=None):
 
 @log_call
 def primitive_func(expression: str, local_dict=None):
-    # Извлекаем переменную если указана
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
     if match:
         var_name = match.group(1)
@@ -676,7 +647,7 @@ def primitive_func(expression: str, local_dict=None):
 
     expr = sympify(expression, locals=local_dict)
     poly = sympy.Poly(expr, var) if var else sympy.Poly(expr)
-    return poly.primitive()  # Возвращает (content, primitive_poly)
+    return poly.primitive()
 
 
 @log_call
@@ -713,7 +684,7 @@ def LM_func(expression: str, local_dict=None):
 
 @log_call
 def LT_func(expression: str, local_dict=None):
-    """Leading Term - старший член (LC * LM)"""
+    """Leading Term - старший член"""
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
     if match:
         var_name = match.group(1)
@@ -728,53 +699,6 @@ def LT_func(expression: str, local_dict=None):
 
 
 @log_call
-def collect_func(expression: str, local_dict=None):
-    # Извлекаем переменную из "по <var>"
-    match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
-    if match:
-        var_name = match.group(1)
-        expression = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression).strip()
-    else:
-        # Автоопределение: берём первую переменную
-        expr = sympify(expression, locals=local_dict)
-        free_vars = list(expr.free_symbols)
-        if len(free_vars) == 0:
-            raise ValueError("Выражение не содержит переменных")
-        elif len(free_vars) == 1:
-            var_name = str(free_vars[0])
-        else:
-            raise ValueError(f"Несколько переменных: {free_vars}. Укажите через 'по x', 'at x', и т.д.")
-
-    expr = sympify(expression, locals=local_dict)
-    var = symbols(var_name)
-    return sympy.collect(expr, var)
-
-
-@log_call
-def degree_func(expression: str, local_dict=None):
-    # Извлекаем переменную если указана
-    match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
-    if match:
-        var_name = match.group(1)
-        expression = re.sub(r'по\s+[a-zA-Zа-яА-Я]\b', '', expression).strip()
-        var = symbols(var_name)
-    else:
-        var = None
-
-    expr = sympify(expression, locals=local_dict)
-
-    try:
-        poly = sympy.Poly(expr, var) if var else sympy.Poly(expr)
-        return poly.degree()
-    except Exception as e:
-        if var is None:
-            raise ValueError(
-                f"Для многочленов с несколькими переменными укажите переменную через 'по x', 'at x', и т.д. ({e})")
-        raise
-
-
-# В sympy_solver.py:
-@log_call
 def sqf_list_func(expression: str, local_dict=None):
     """Квадратно-свободное разложение"""
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
@@ -788,3 +712,76 @@ def sqf_list_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     poly = sympy.Poly(expr, var) if var else sympy.Poly(expr)
     return poly.sqf_list()
+
+
+@log_call
+def limit_func(expression: str, local_dict=None):
+    """
+    Вычисляет предел функции
+
+    Поддерживаемые форматы:
+    - "f(x), x, point" - предел f(x) при x -> point
+    - "Limit(f(x), x, point)" - объект Limit
+
+    Направление предела:
+    - point - двусторонний предел
+    - "point+" или "point-" для односторонних пределов
+
+    Примеры:
+        limit_func("1/x, x, 0+")  # +∞
+        limit_func("1/x, x, 0-")  # -∞
+        limit_func("sin(x)/x, x, 0")  # 1
+        limit_func("(1+1/x)**x, x, oo")  # e
+    """
+    if local_dict is None:
+        local_dict = {}
+
+    try:
+        # Пытаемся распарсить как Limit объект
+        expr = sympify(expression, locals=local_dict)
+
+        # Если это уже Limit, вычисляем
+        if hasattr(expr, 'doit'):
+            result = expr.doit()
+            return result
+
+        # Иначе парсим как "expr, var, point"
+        parts = [p.strip() for p in expression.split(',')]
+
+        if len(parts) < 3:
+            return "Ошибка: недостаточно аргументов. Формат: f(x), x, point"
+
+        func_expr = sympify(parts[0], locals=local_dict)
+        var_str = parts[1].strip()
+        point_str = parts[2].strip()
+
+        # Определяем переменную
+        var = sympify(var_str, locals=local_dict)
+        if not isinstance(var, Symbol):
+            return f"Ошибка: '{var_str}' не является переменной"
+
+        # Определяем точку и направление
+        direction = '+-'  # по умолчанию двусторонний
+
+        if point_str.endswith('+'):
+            direction = '+'
+            point_str = point_str[:-1].strip()
+        elif point_str.endswith('-'):
+            direction = '-'
+            point_str = point_str[:-1].strip()
+
+        # Парсим точку (может быть число, oo, -oo и т.д.)
+        if point_str.lower() in ('oo', 'inf', 'infinity', '∞'):
+            point = oo
+        elif point_str.lower() in ('-oo', '-inf', '-infinity'):
+            point = -oo
+        else:
+            point = sympify(point_str, locals=local_dict)
+
+        # Вычисляем предел
+        result = limit(func_expr, var, point, dir=direction)
+
+        return result
+
+    except Exception as e:
+        return f"Ошибка при вычислении предела: {e}"

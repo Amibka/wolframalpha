@@ -1,0 +1,58 @@
+{
+  "app": {
+    "title": "🔬 WolframAlpha Calculator",
+    "subtitle": "Solve equations, build graphs, and compute limits instantly",
+    "window_title": "WolframAlpha Calculator"
+  },
+  "header": {
+    "logo": "🧮 WolframAlpha",
+    "theme_tooltip": "Change theme",
+    "language_tooltip": "Change language / Сменить язык"
+  },
+  "input": {
+    "placeholder": "Enter: solve x^2=4, plot y=x^2, or graph x^2+y^2=25...",
+    "label": "📝 Input"
+  },
+  "output": {
+    "label": "✨ Solution"
+  },
+  "plot": {
+    "label": "📊 Graph",
+    "2d_title": "2D Graph",
+    "3d_title": "3D Graph",
+    "implicit_title": "Implicit Curve",
+    "building": "Building graph...",
+    "error": "Error building graph",
+    "format_hint": "Examples: y=x^2, x^2+y^2=25, z=x^2+y^2",
+    "examples": "Try: plot y=sin(x), graph x^2+y^2=25, plot z=x*y"
+  },
+  "buttons": {
+    "solve": "Solve",
+    "plot": "Plot",
+    "cancel": "Cancel",
+    "apply": "Apply"
+  },
+  "settings": {
+    "title": "⚙️ Theme Settings",
+    "subtitle": "Click on a theme card to preview",
+    "theme_selection": "Choose your theme"
+  },
+  "themes": {
+    "dark": {
+      "name": "🌙 Dark Theme",
+      "description": "Soft dark theme for comfortable work"
+    },
+    "light": {
+      "name": "☀️ Light Theme",
+      "description": "Clean light theme for daytime work"
+    },
+    "ocean": {
+      "name": "🌊 Ocean",
+      "description": "Calm ocean theme with blue accents"
+    }
+  },
+  "errors": {
+    "display_error": "❌ Display error:",
+    "plot_error": "❌ Plot error:"
+  }
+}

@@ -194,5 +194,19 @@
   ],
   "content": [
     "content"
+  ],
+  "integral": [
+    "integral", "интеграл", "∫"
+  ],
+  "limit": ["lim", "limit"
+  ],
+  "plot": [
+    "plot", "график", "graph", "построить", "нарисовать", "draw"
+  ],
+  "plot2d": [
+    "plot2d", "график2d", "graph2d"
+  ],
+  "plot3d": [
+    "plot3d", "график3d", "graph3d"
   ]
 }
