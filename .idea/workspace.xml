@@ -5,31 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa5095d1-bd8a-4f18-ae9c-b716312a9e4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/plot_settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/db_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/locales/eng.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/locales/ru.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/header.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/history_window.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/themes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/widgets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/math_formatter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/translations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/app.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/actions.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/actions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/sympy_solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/sympy_solver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/event_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/event_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/language/commands_translate.json" beforeDir="false" afterPath="$PROJECT_DIR$/language/commands_translate.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/history.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/history.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/errors.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/errors.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/solve_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/solve_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/suggest_correction.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/suggest_correction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,35 +52,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.pytest in solve_test.py.executor": "Run",
-    "Python tests.pytest in tests.py.executor": "Run",
-    "Python.__init__.executor": "Run",
-    "Python.actions.executor": "Run",
-    "Python.dataset_generator.executor": "Run",
-    "Python.launch.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.normalizer.executor": "Run",
-    "Python.pre_tokenizers.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "F:/Pycharm/wolframalpha/pngs",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.pytest in solve_test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest in tests.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.actions.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset_generator.executor&quot;: &quot;Run&quot;,
+    &quot;Python.launch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.normalizer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pre_tokenizers.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Pycharm/wolframalpha/assets&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Pycharm\wolframalpha\assets" />
       <recent name="F:\Pycharm\wolframalpha\pngs" />
       <recent name="F:\Pycharm\wolframalpha\utils" />
     </key>
@@ -173,7 +158,9 @@
       <workItem from="1762627447896" duration="611000" />
       <workItem from="1762694536684" duration="4508000" />
       <workItem from="1762794209111" duration="659000" />
-      <workItem from="1762871847020" duration="1763000" />
+      <workItem from="1762871847020" duration="3586000" />
+      <workItem from="1762968273181" duration="1017000" />
+      <workItem from="1763019684673" duration="1112000" />
     </task>
     <servers />
   </component>
@@ -201,7 +188,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/core/parser.py</url>
-          <line>655</line>
+          <line>709</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
@@ -209,12 +196,12 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/wolframalpha$dataset_generator.coverage" NAME="dataset_generator Coverage Results" MODIFIED="1761578248589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ai/utils" />
-    <SUITE FILE_PATH="coverage/wolframalpha$pytest_in_solve_test_py.coverage" NAME="pytest in solve_test.py Coverage Results" MODIFIED="1762699222758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/wolframalpha$launch.coverage" NAME="launch Coverage Results" MODIFIED="1762873201302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/wolframalpha$pytest_in_solve_test_py.coverage" NAME="pytest in solve_test.py Coverage Results" MODIFIED="1763020479902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wolframalpha$launch.coverage" NAME="launch Coverage Results" MODIFIED="1763020573505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/wolframalpha$actions.coverage" NAME="actions Coverage Results" MODIFIED="1762117130508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/core" />
     <SUITE FILE_PATH="coverage/wolframalpha$normalizer.coverage" NAME="normalizer Coverage Results" MODIFIED="1761567333707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ai" />
     <SUITE FILE_PATH="coverage/wolframalpha$main.coverage" NAME="main Coverage Results" MODIFIED="1761433616740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/wolframalpha$pytest_in_tests_py.coverage" NAME="pytest in tests.py Coverage Results" MODIFIED="1762873490782" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wolframalpha$pytest_in_tests_py.coverage" NAME="pytest in tests.py Coverage Results" MODIFIED="1762968406415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/wolframalpha$pre_tokenizers.coverage" NAME="pre_tokenizers Coverage Results" MODIFIED="1761573232231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ai" />
     <SUITE FILE_PATH="coverage/wolframalpha$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1762698882564" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/database" />
   </component>

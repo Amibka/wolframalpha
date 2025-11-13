@@ -507,8 +507,14 @@ def ratsimp_func(expression: str, local_dict=None):
 
 @log_call
 def logcombine_func(expression: str, local_dict=None):
+    """
+    Объединяет логарифмы
+
+    ИСПРАВЛЕНИЕ: добавлен параметр force=True для принудительного объединения
+    """
     expr = sympify(expression, locals=local_dict)
-    return sympy.logcombine(expr)
+    # force=True заставляет объединять логарифмы даже с символьными аргументами
+    return sympy.logcombine(expr, force=True)
 
 
 @log_call
@@ -719,6 +725,8 @@ def limit_func(expression: str, local_dict=None):
     """
     Вычисляет предел функции
 
+    ИСПРАВЛЕНИЕ: улучшена обработка односторонних пределов с синтаксисом "0+"
+
     Поддерживаемые форматы:
     - "f(x), x, point" - предел f(x) при x -> point
     - "Limit(f(x), x, point)" - объект Limit
@@ -737,7 +745,52 @@ def limit_func(expression: str, local_dict=None):
         local_dict = {}
 
     try:
-        # Пытаемся распарсить как Limit объект
+        # ИСПРАВЛЕНИЕ: Сначала пытаемся распарсить полностью
+        # Если не получается (из-за "0+"), обрабатываем вручную
+
+        # Проверяем, есть ли запятые (формат "expr, var, point")
+        if ',' in expression:
+            parts = [p.strip() for p in expression.split(',')]
+
+            if len(parts) < 3:
+                return "Ошибка: недостаточно аргументов. Формат: f(x), x, point"
+
+            func_str = parts[0].strip()
+            var_str = parts[1].strip()
+            point_str = parts[2].strip()
+
+            # Парсим функцию
+            func_expr = sympify(func_str, locals=local_dict)
+
+            # Определяем переменную
+            var = sympify(var_str, locals=local_dict)
+            if not isinstance(var, Symbol):
+                return f"Ошибка: '{var_str}' не является переменной"
+
+            # Определяем точку и направление
+            direction = '+-'  # по умолчанию двусторонний
+
+            if point_str.endswith('+'):
+                direction = '+'
+                point_str = point_str[:-1].strip()
+            elif point_str.endswith('-'):
+                direction = '-'
+                point_str = point_str[:-1].strip()
+
+            # Парсим точку (может быть число, oo, -oo и т.д.)
+            if point_str.lower() in ('oo', 'inf', 'infinity', '∞'):
+                point = oo
+            elif point_str.lower() in ('-oo', '-inf', '-infinity'):
+                point = -oo
+            else:
+                point = sympify(point_str, locals=local_dict)
+
+            # Вычисляем предел
+            result = limit(func_expr, var, point, dir=direction)
+
+            return result
+
+        # Если нет запятых, пытаемся распарсить как Limit объект
         expr = sympify(expression, locals=local_dict)
 
         # Если это уже Limit, вычисляем
@@ -745,43 +798,8 @@ def limit_func(expression: str, local_dict=None):
             result = expr.doit()
             return result
 
-        # Иначе парсим как "expr, var, point"
-        parts = [p.strip() for p in expression.split(',')]
-
-        if len(parts) < 3:
-            return "Ошибка: недостаточно аргументов. Формат: f(x), x, point"
-
-        func_expr = sympify(parts[0], locals=local_dict)
-        var_str = parts[1].strip()
-        point_str = parts[2].strip()
-
-        # Определяем переменную
-        var = sympify(var_str, locals=local_dict)
-        if not isinstance(var, Symbol):
-            return f"Ошибка: '{var_str}' не является переменной"
-
-        # Определяем точку и направление
-        direction = '+-'  # по умолчанию двусторонний
-
-        if point_str.endswith('+'):
-            direction = '+'
-            point_str = point_str[:-1].strip()
-        elif point_str.endswith('-'):
-            direction = '-'
-            point_str = point_str[:-1].strip()
-
-        # Парсим точку (может быть число, oo, -oo и т.д.)
-        if point_str.lower() in ('oo', 'inf', 'infinity', '∞'):
-            point = oo
-        elif point_str.lower() in ('-oo', '-inf', '-infinity'):
-            point = -oo
-        else:
-            point = sympify(point_str, locals=local_dict)
-
-        # Вычисляем предел
-        result = limit(func_expr, var, point, dir=direction)
-
-        return result
+        # Если это просто выражение, возвращаем как есть
+        return expr
 
     except Exception as e:
         return f"Ошибка при вычислении предела: {e}"

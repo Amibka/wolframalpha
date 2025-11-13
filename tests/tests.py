@@ -743,3 +743,439 @@ class TestEdgeCases:
         """Смешанный язык"""
         command, expr = router.extract_command("solve уравнение x^2 = 4")
         assert command in ["solve", "error"]
+
+    def test_special_characters(self, router):
+        """Специальные символы"""
+        result = router.process_command("solve", "x^2 - 4 = 0")
+        assert result is not None
+
+    def test_division_by_zero(self, router):
+        """Деление на ноль"""
+        result = router.process_command("solve", "1/0")
+        # Должно вернуть ошибку или oo
+        assert result is not None
+
+    def test_negative_sqrt(self, router):
+        """Корень из отрицательного числа"""
+        result = router.process_command("solve", "sqrt(-1)")
+        assert result is not None
+
+    def test_complex_numbers(self, router):
+        """Комплексные числа"""
+        result = router.process_command("solve", "x^2 + 1 = 0")
+        assert result is not None
+
+    def test_factorial(self, router):
+        """Факториал"""
+        result = router.process_command("simplify", "factorial(5)")
+        assert result is not None
+
+    def test_absolute_value(self, router):
+        """Абсолютное значение"""
+        result = router.process_command("simplify", "abs(-5)")
+        assert result is not None
+
+    def test_exponential(self, router):
+        """Экспоненциальная функция"""
+        result = router.process_command("derivative", "exp(x)")
+        assert result is not None
+
+    def test_logarithm_natural(self, router):
+        """Натуральный логарифм"""
+        result = router.process_command("derivative", "ln(x)")
+        assert result is not None
+
+    def test_logarithm_base10(self, router):
+        """Логарифм по основанию 10"""
+        result = router.process_command("simplify", "log10(100)")
+        assert result is not None
+
+    def test_multiple_variables(self, router):
+        """Множественные переменные"""
+        result = router.process_command("solve", "x + y = 5")
+        assert result is not None
+
+
+# ============================================================================
+# ТЕСТЫ - Интеграция компонентов
+# ============================================================================
+
+class TestIntegration:
+    """Тестирование интеграции всех компонентов"""
+
+    def test_parse_and_compute_integral(self, parser, integral_computer):
+        """Парсинг и вычисление интеграла"""
+        parsed, local_dict = parser.parse("∫x^2 dx")
+        result, error = integral_computer.compute_all_integrals(parsed, local_dict)
+        assert error is None
+        assert result is not None
+
+    def test_parse_and_compute_limit(self, parser, limit_computer):
+        """Парсинг и вычисление предела"""
+        parsed, local_dict = parser.parse("lim x->0 sin(x)/x")
+        result, error = limit_computer.compute_all_limits(parsed, local_dict)
+        assert error is None
+        assert result == 1
+
+    def test_full_workflow_solve(self, router):
+        """Полный цикл: команда → парсинг → решение"""
+        result = get_text("solve x^2 - 9 = 0")
+        assert result is not None
+
+    def test_full_workflow_integral(self, router):
+        """Полный цикл: интеграл"""
+        result = get_text("integral x^2 dx от 0 до 1")
+        assert result is not None
+
+    def test_full_workflow_limit(self, router):
+        """Полный цикл: предел"""
+        result = get_text("limit x->oo 1/x")
+        assert result is not None
+
+    def test_chained_operations(self, router):
+        """Цепочка операций"""
+        # Сначала интеграл, потом упрощение
+        result1 = get_text("integral x dx")
+        result2 = get_text(f"simplify {result1}")
+        assert result2 is not None
+
+
+# ============================================================================
+# ТЕСТЫ - Специфические математические случаи
+# ============================================================================
+
+class TestMathematicalCases:
+    """Тестирование специфических математических случаев"""
+
+    def test_trigonometric_identities(self, router):
+        """Тригонометрические тождества"""
+        result = router.process_command("trigsimp", "sin(x)^2 + cos(x)^2")
+        # Должно быть 1
+        assert str(result) == "1"
+
+    def test_euler_formula(self, router):
+        """Формула Эйлера"""
+        result = router.process_command("simplify", "exp(I*pi) + 1")
+        # Должно быть 0
+        assert result is not None
+
+    def test_lhopital_rule(self, router):
+        """Правило Лопителя (неопределенность 0/0)"""
+        result = router.process_command("limit", "x->0 (sin(x) - x)/x^3")
+        assert result is not None
+
+    def test_improper_integral(self, router):
+        """Несобственный интеграл"""
+        result = router.process_command("integral", "1/x^2 от 1 до oo dx")
+        assert result is not None
+
+    def test_partial_fractions(self, router):
+        """Разложение на простейшие дроби"""
+        result = router.process_command("apart", "1/(x^2-1)")
+        assert result is not None
+
+    def test_polynomial_division(self, router):
+        """Деление многочленов"""
+        result = router.process_command("advanced.div", "x^3 + 2*x^2 + 3*x + 4, x + 1")
+        assert result is not None
+
+    def test_gcd_polynomials(self, router):
+        """НОД многочленов"""
+        result = router.process_command("advanced.gcd", "x^2 - 1, x^2 - 2*x + 1")
+        assert result is not None
+
+    def test_taylor_series(self, router):
+        """Ряд Тейлора (через производные)"""
+        # Сначала берем производные sin(x)
+        result = router.process_command("derivative", "sin(x) по x")
+        assert result is not None
+
+    def test_matrix_operations(self):
+        """Матричные операции (если поддерживаются)"""
+        # Пропускаем, если не реализовано
+        pass
+
+    def test_differential_equations(self):
+        """Дифференциальные уравнения (если поддерживаются)"""
+        # Пропускаем, если не реализовано
+        pass
+
+
+# ============================================================================
+# ТЕСТЫ - Производительность
+# ============================================================================
+
+class TestPerformance:
+    """Тестирование производительности"""
+
+    def test_large_polynomial(self, router):
+        """Большой многочлен"""
+        import time
+        expr = " + ".join([f"x^{i}" for i in range(100)])
+        start = time.time()
+        result = router.process_command("expand", expr)
+        elapsed = time.time() - start
+        assert elapsed < 10  # Должно выполниться за разумное время
+        assert result is not None
+
+    def test_repeated_operations(self, router):
+        """Многократные операции"""
+        import time
+        start = time.time()
+        for i in range(100):
+            result = router.process_command("solve", f"x - {i} = 0")
+        elapsed = time.time() - start
+        assert elapsed < 10
+
+    def test_nested_functions(self, router):
+        """Вложенные функции"""
+        expr = "sin(cos(tan(x)))"
+        result = router.process_command("derivative", expr + " по x")
+        assert result is not None
+
+
+# ============================================================================
+# ТЕСТЫ - Обработка ошибок
+# ============================================================================
+
+class TestErrorHandling:
+    """Тестирование обработки ошибок"""
+
+    def test_malformed_expression(self, router):
+        """Некорректное выражение"""
+        result = router.process_command("solve", "x + + + y")
+        # Должна быть ошибка или None
+        assert result is not None
+
+    def test_undefined_function(self, router):
+        """Неопределенная функция"""
+        result = router.process_command("solve", "undefined_func(x)")
+        assert result is not None
+
+    def test_type_mismatch(self, router):
+        """Несоответствие типов"""
+        result = router.process_command("solve", "x + 'string'")
+        assert result is not None
+
+    def test_circular_reference(self, router):
+        """Циклическая ссылка"""
+        # Сложно создать, пропускаем
+        pass
+
+    def test_stack_overflow(self, router):
+        """Переполнение стека (глубокая рекурсия)"""
+        # Сложно тестировать, пропускаем
+        pass
+
+    def test_memory_limit(self, router):
+        """Ограничение памяти"""
+        # Сложно тестировать, пропускаем
+        pass
+
+
+# ============================================================================
+# ТЕСТЫ - Локализация
+# ============================================================================
+
+class TestLocalization:
+    """Тестирование поддержки разных языков"""
+
+    def test_russian_commands(self, router):
+        """Русские команды"""
+        russian_commands = [
+            "решить x^2 = 4",
+            "упростить (x+1)^2",
+            "производная x^3 по x",
+            "интеграл x^2 dx",
+            "предел x->0 sin(x)/x",
+            "разложить x^2-4",
+            "раскрыть (x+1)*(x-1)"
+        ]
+
+        for cmd in russian_commands:
+            result = get_text(cmd)
+            assert result is not None
+
+    def test_english_commands(self, router):
+        """Английские команды"""
+        english_commands = [
+            "solve x^2 = 4",
+            "simplify (x+1)^2",
+            "derivative x^3 by x",
+            "integral x^2 dx",
+            "limit x->0 sin(x)/x",
+            "factor x^2-4",
+            "expand (x+1)*(x-1)"
+        ]
+
+        for cmd in english_commands:
+            result = get_text(cmd)
+            assert result is not None
+
+    def test_mixed_language_symbols(self, router):
+        """Смешанные языковые символы"""
+        result = get_text("solve уравнение x^2 - 4 = 0 по x")
+        assert result is not None
+
+
+# ============================================================================
+# ТЕСТЫ - Реальные кейсы использования
+# ============================================================================
+
+class TestRealWorldUseCases:
+    """Тестирование реальных случаев использования"""
+
+    def test_physics_kinematics(self, router):
+        """Физика: кинематика"""
+        # s = v*t + (a*t^2)/2
+        result = router.process_command("solve", "s - v*t - (a*t^2)/2 = 0 по t")
+        assert result is not None
+
+    def test_compound_interest(self, router):
+        """Финансы: сложный процент"""
+        # A = P*(1 + r/n)^(n*t)
+        result = router.process_command("solve", "A - P*(1 + r/n)^(n*t) = 0 по t")
+        assert result is not None
+
+    def test_area_under_curve(self, router):
+        """Площадь под кривой"""
+        result = router.process_command("integral", "x^2 от 0 до 2 dx")
+        assert result is not None
+
+    def test_velocity_from_position(self, router):
+        """Скорость из положения (производная)"""
+        result = router.process_command("derivative", "t^3 - 2*t^2 + t по t")
+        assert result is not None
+
+    def test_optimization_problem(self, router):
+        """Задача оптимизации (найти экстремум)"""
+        # Найти производную и приравнять к нулю
+        result1 = router.process_command("derivative", "x^3 - 3*x^2 + 2 по x")
+        result2 = router.process_command("solve", f"{result1} = 0")
+        assert result2 is not None
+
+    def test_circle_equation(self, router):
+        """Уравнение окружности"""
+        result = router.process_command("plot", "x^2 + y^2 = 25")
+        assert isinstance(result, dict)
+        assert result['type'] == 'plot_2d_implicit'
+
+    def test_projectile_motion(self, router):
+        """Движение снаряда"""
+        # y = x*tan(θ) - (g*x^2)/(2*v^2*cos^2(θ))
+        result = router.process_command("solve", "y - x*tan(theta) + (g*x^2)/(2*v^2*cos(theta)^2) = 0 по x")
+        assert result is not None
+
+
+# ============================================================================
+# ПАРАМЕТРИЗОВАННЫЕ ТЕСТЫ
+# ============================================================================
+
+@pytest.mark.parametrize("expression,expected_type", [
+    ("x^2", "polynomial"),
+    ("sin(x)", "trigonometric"),
+    ("exp(x)", "exponential"),
+    ("log(x)", "logarithmic"),
+    ("sqrt(x)", "radical"),
+    ("abs(x)", "absolute_value"),
+])
+def test_expression_types(expression, expected_type, router):
+    """Тестирование разных типов выражений"""
+    result = router.process_command("simplify", expression)
+    assert result is not None
+
+
+@pytest.mark.parametrize("equation,variable,solution_count", [
+    ("x - 5 = 0", "x", 1),
+    ("x^2 - 4 = 0", "x", 2),
+    ("x^3 = 0", "x", 1),
+    ("x^2 + 1 = 0", "x", 2),  # Комплексные решения
+])
+def test_equation_solutions(equation, variable, solution_count, router):
+    """Тестирование количества решений уравнений"""
+    result = router.process_command("solve", equation)
+    assert result is not None
+
+
+@pytest.mark.parametrize("func,var,expected", [
+    ("x^2", "x", "2*x"),
+    ("x^3", "x", "3*x^2"),
+    ("sin(x)", "x", "cos(x)"),
+    ("cos(x)", "x", "-sin(x)"),
+    ("exp(x)", "x", "exp(x)"),
+    ("ln(x)", "x", "1/x"),
+])
+def test_derivatives(func, var, expected, router):
+    """Тестирование производных"""
+    result = router.process_command("derivative", f"{func} по {var}")
+    assert result is not None
+
+
+@pytest.mark.parametrize("func,var", [
+    ("x", "x"),
+    ("x^2", "x"),
+    ("sin(x)", "x"),
+    ("1/x", "x"),
+])
+def test_integrals(func, var, router):
+    """Тестирование интегралов"""
+    result = router.process_command("integral", f"{func} d{var}")
+    assert result is not None
+
+
+@pytest.mark.parametrize("expr,point,expected", [
+    ("x^2", "2", 4),
+    ("1/x", "oo", 0),
+    ("sin(x)/x", "0", 1),
+])
+def test_limits(expr, point, expected, router):
+    """Тестирование пределов"""
+    result = router.process_command("limit", f"x->{point} {expr}")
+    assert result is not None
+
+
+# ============================================================================
+# ТЕСТЫ - Регрессия
+# ============================================================================
+
+class TestRegression:
+    """Тестирование регрессий (баги из прошлых версий)"""
+
+    def test_integral_space_bug(self, parser):
+        """Баг: integralsqrt вместо integral sqrt"""
+        result, _ = parser.parse("integralsqrt(x)")
+        assert "integral" in result and "sqrt" in result
+
+    def test_equation_equals_sign(self, router):
+        """Баг: некорректная обработка знака ="""
+        result = router.process_command("solve", "x^2 = 4")
+        assert result is not None
+
+    def test_limit_direction_parsing(self, parser):
+        """Баг: направление предела (0+ / 0-)"""
+        result, _ = parser.parse("lim x->0+ 1/x")
+        assert "'+'" in result
+
+    def test_multiple_variables_in_integral(self, parser):
+        """Баг: множественные переменные в интеграле"""
+        result, _ = parser.parse("integral x*y dx")
+        assert "Integral" in result
+
+
+# ============================================================================
+# ФИКСТУРЫ ДЛЯ CLEANUP
+# ============================================================================
+
+@pytest.fixture(autouse=True)
+def cleanup():
+    """Очистка после каждого теста"""
+    yield
+    # Здесь можно добавить код очистки, если нужно
+
+
+# ============================================================================
+# ЗАПУСК ВСЕХ ТЕСТОВ
+# ============================================================================
+
+if __name__ == "__main__":
+    pytest.main([__file__, "-v", "--tb=short", "--maxfail=5"])

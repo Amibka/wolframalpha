@@ -74,7 +74,8 @@ class MathParser:
             "ctg": sympy.cot,
             "ln": sympy.ln,
             "Integral": Integral,
-            "Limit": Limit
+            "Limit": Limit,
+            "root": lambda x, n: sympy.root(x, n)
         })
         # Добавляем все переменные
         letters = symbols('a b c d e f g h i k l m n o p q r s t u v w x y z')
@@ -235,6 +236,55 @@ class MathParser:
             i += 1
 
         return ''.join(out)
+
+    @log_call
+    def replace_roots(self, expr: str) -> str:
+        """
+        Преобразует корни n-й степени в root(x, n)
+
+        Поддерживаемые формы:
+        - root(3, 8) -> root(8, 3)  (меняем порядок аргументов)
+        - root3(8) -> root(8, 3)
+        - cbrt(8) -> root(8, 3)
+        - ∛(8) -> root(8, 3)
+        - ∜(16) -> root(16, 4)
+        """
+        if not expr:
+            return ""
+
+        # 1. Обрабатываем root(n, x) -> root(x, n)
+        def fix_root_args(m):
+            arg1 = m.group(1).strip()
+            arg2 = m.group(2).strip()
+
+            # Проверяем, первый аргумент - это число (степень)?
+            if re.match(r'^\d+$', arg1):
+                print(f"🔄 Меняем порядок: root({arg1}, {arg2}) -> root({arg2}, {arg1})")
+                return f'root({arg2}, {arg1})'
+            return m.group(0)
+
+        expr = re.sub(r'root\((\d+),\s*([^)]+)\)', fix_root_args, expr)
+
+        # 2. Обрабатываем rootN(x) -> root(x, N)
+        def replace_rootn(m):
+            n = m.group(1)
+            x = m.group(2)
+            result = f'root({x}, {n})'
+            print(f"🔄 Преобразование: root{n}({x}) -> {result}")
+            return result
+
+        expr = re.sub(r'root(\d+)\(([^)]+)\)', replace_rootn, expr)
+
+        # 3. Обрабатываем cbrt(x) -> root(x, 3)
+        def replace_cbrt(m):
+            x = m.group(1)
+            result = f'root({x}, 3)'
+            print(f"🔄 Преобразование: cbrt({x}) -> {result}")
+            return result
+
+        expr = re.sub(r'cbrt\(([^)]+)\)', replace_cbrt, expr)
+
+        return expr
 
     @log_call
     def replace_limits(self, expr: str) -> str:
@@ -548,6 +598,10 @@ class MathParser:
         # 2. Обрабатываем логарифмы
         if 'log' in expr or 'ln' in expr:
             expr = self.replace_custom_log(expr)
+
+            # 2.5. Обрабатываем корни
+        if 'root' in expr or 'cbrt' in expr:
+            expr = self.replace_roots(expr)
 
         # 3. Обрабатываем пределы
         if any(kw in expr.lower() for kw in ['lim', 'limit', 'предел', 'при', ' as ', '->']):
