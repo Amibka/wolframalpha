@@ -12,9 +12,9 @@ math_functions = [
     "asinh", "acosh", "atanh",
 
     # экспоненты / логарифмы / степени / корни
-    "exp", "log", "ln",          # ln — алиас для log в SymPy
-    "sqrt", "root",              # sqrt(x) и root(x, n)
-    "pow",                       # степень (обычно x**y, но есть вспомогательные функции)
+    "exp", "log", "ln",  # ln — алиас для log в SymPy
+    "sqrt", "root",  # sqrt(x) и root(x, n)
+    "pow",  # степень (обычно x**y, но есть вспомогательные функции)
 
     # базовые числовые функции
     "Abs", "sign", "floor", "ceiling", "factorial",

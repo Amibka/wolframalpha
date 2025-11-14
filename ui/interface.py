@@ -1,5 +1,5 @@
 """
-ui/main_window.py - ОБНОВЛЁННАЯ ВЕРСИЯ С БД
+ui/main_window.py - ИТОГОВАЯ ВЕРСИЯ С ПРИМЕРАМИ И ИСТОРИЕЙ
 """
 
 from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import (
 from ui.widgets import MathOutputWidget, ModernButton, PlotWidget
 from ui.header import HeaderWidget
 from ui.history_window import HistoryWindow
+from ui.examples_window import ExamplesWindow
 from ui.themes import get_theme
 from utils.translations import translator, t
 from handlers.event_handler import on_enter_pressed
@@ -53,7 +54,8 @@ class MainWindow(QWidget):
         self.header = HeaderWidget()
         self.header.theme_changed.connect(self.on_theme_changed)
         self.header.language_changed.connect(self.toggle_language)
-        self.header.history_requested.connect(self.show_history)  # НОВОЕ!
+        self.header.history_requested.connect(self.show_history)
+        self.header.examples_requested.connect(self.show_examples)  # ДОБАВЛЕНО!
         main_layout.addWidget(self.header)
 
         # === Scroll Area для контента ===
@@ -215,6 +217,21 @@ class MainWindow(QWidget):
         history_window.entry_selected.connect(self.load_history_entry)
         history_window.exec()
 
+    def show_examples(self):
+        """Показывает окно с примерами"""
+        examples_window = ExamplesWindow(self)
+        examples_window.example_selected.connect(self.load_example)
+        examples_window.exec()
+
+    def load_example(self, expression: str):
+        """Загружает пример из окна примеров"""
+        # Вставляем выражение в поле ввода
+        self.input_field.setText(expression)
+        self.input_field.setFocus()
+
+        # Можно показать подсказку
+        print(f"📚 Загружен пример: {expression}")
+
     def load_history_entry(self, entry: dict):
         """Загружает запись из истории"""
         # Устанавливаем ввод
@@ -228,7 +245,7 @@ class MainWindow(QWidget):
         # Показываем результат
         if entry['result_type'] == 'error':
             self.plot_card.hide()
-            self.output_widget.setPlainText(f"❌ {entry['error_message']}")
+            self.output_widget.setPlainText(f"{entry['error_message']}")
             if not self.result_card.isVisible():
                 self.show_card_animated(self.result_card, self.result_card_opacity, 100)
 
@@ -312,7 +329,7 @@ class MainWindow(QWidget):
                 expr = result['expression']
                 var = result['variables'][0] if result['variables'] else 'x'
 
-                print(f"🎨 Строим 2D график: y = {expr}")
+                print(f"Строим 2D график: y = {expr}")
                 self.plot_widget.plot_2d(expr, var=var)
 
                 if not self.plot_card.isVisible():
@@ -326,7 +343,7 @@ class MainWindow(QWidget):
                 var1 = result['variables'][0] if len(result['variables']) > 0 else 'x'
                 var2 = result['variables'][1] if len(result['variables']) > 1 else 'y'
 
-                print(f"🎨 Строим неявный график: {expr} = 0")
+                print(f"Строим неявный график: {expr} = 0")
                 self.plot_widget.plot_2d_implicit(expr, var1=var1, var2=var2)
 
                 if not self.plot_card.isVisible():
@@ -340,7 +357,7 @@ class MainWindow(QWidget):
                 var1 = result['variables'][0] if len(result['variables']) > 0 else 'x'
                 var2 = result['variables'][1] if len(result['variables']) > 1 else 'y'
 
-                print(f"🎨 Строим 3D график: z = {expr}")
+                print(f"Строим 3D график: z = {expr}")
                 self.plot_widget.plot_3d(expr, var1=var1, var2=var2)
 
                 if not self.plot_card.isVisible():
@@ -351,7 +368,7 @@ class MainWindow(QWidget):
                 self.plot_card.hide()
 
                 error_message = result.get('message', 'Неизвестная ошибка')
-                self.output_widget.setPlainText(f"❌ {error_message}")
+                self.output_widget.setPlainText(f"{error_message}")
 
                 if not self.result_card.isVisible():
                     self.show_card_animated(self.result_card, self.result_card_opacity, 100)
@@ -440,9 +457,9 @@ class MainWindow(QWidget):
                 tags=tags
             )
 
-            print(f"💾 Запись сохранена в БД (время: {execution_time:.3f}s)")
+            print(f"Запись сохранена в БД (время: {execution_time:.3f}s)")
 
         except Exception as e:
             import traceback
-            print(f"⚠️ Ошибка сохранения в БД: {e}")
+            print(f"Ошибка сохранения в БД: {e}")
             print(traceback.format_exc())

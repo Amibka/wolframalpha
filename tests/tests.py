@@ -10,8 +10,8 @@ tests/test_router_comprehensive.py - КОМПЛЕКСНОЕ ТЕСТИРОВАН
 """
 
 import pytest
-import sympy
-from sympy import symbols, sympify, oo, pi, E, sin, cos, tan, sqrt, log, exp
+from sympy import oo
+
 from core.parser import (
     MathParser,
     IntegralComputer,
@@ -384,7 +384,7 @@ class TestIntegralComputer:
         result, error = integral_computer.compute_all_integrals(parsed, local_dict)
         assert error is None
         # Результат должен быть 1/3
-        assert abs(float(result) - 1/3) < 0.001
+        assert abs(float(result) - 1 / 3) < 0.001
 
     def test_nested_integrals(self, integral_computer, parser):
         """Вложенные интегралы (двойной интеграл)"""

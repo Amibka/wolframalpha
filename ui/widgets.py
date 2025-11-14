@@ -1,13 +1,14 @@
-from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QSize
-from PyQt6.QtWidgets import QTextEdit, QPushButton, QGraphicsOpacityEffect, QWidget, QVBoxLayout, QLabel, QSizePolicy
-from PyQt6.QtWebEngineWidgets import QWebEngineView
-from PyQt6.QtCore import QUrl
-from PyQt6.QtGui import QFont
-import plotly.graph_objects as go
-from sympy import symbols, lambdify, sympify, solve
-import numpy as np
-import tempfile
 import os
+import tempfile
+
+import numpy as np
+import plotly.graph_objects as go
+from PyQt6.QtCore import QUrl
+from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
+from PyQt6.QtGui import QFont
+from PyQt6.QtWebEngineWidgets import QWebEngineView
+from PyQt6.QtWidgets import QTextEdit, QPushButton, QGraphicsOpacityEffect, QWidget, QVBoxLayout, QSizePolicy
+from sympy import symbols, lambdify, sympify, solve
 
 # Импортируем настройки
 try:
@@ -648,7 +649,6 @@ ui/widgets.py - Кастомные виджеты
 """
 
 from PyQt6.QtWidgets import QPushButton
-from PyQt6.QtCore import QSize
 
 
 class IconButton(QPushButton):

@@ -1,6 +1,6 @@
 actions = [
     # Уравнения / корни
-    "solve", "nsolve",
+    "solve",
 
     # Алгебра / упрощение
     "simplify", "factor", "expand", "collect", "cancel", "together", "apart",

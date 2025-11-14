@@ -2,6 +2,7 @@ import logging
 import os
 from functools import wraps
 
+
 # === Базовая настройка логирования ===
 def setup_logger(name="wolfram_pyqt", log_dir="logs"):
     os.makedirs(log_dir, exist_ok=True)
@@ -21,13 +22,19 @@ def setup_logger(name="wolfram_pyqt", log_dir="logs"):
     console.setFormatter(formatter)
     logger.addHandler(console)
 
-    # === Запись в файл ===
+    # === Запись в файл (app.log) ===
     file_handler = logging.FileHandler(os.path.join(log_dir, "app.log"), encoding="utf-8")
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    # === Запись ошибок отдельно ===
+    # === Запись в отдельный txt-файл (app.txt) ===
+    txt_handler = logging.FileHandler(os.path.join(log_dir, "app.txt"), encoding="utf-8")
+    txt_handler.setLevel(logging.DEBUG)
+    txt_handler.setFormatter(formatter)
+    logger.addHandler(txt_handler)
+
+    # === Запись ошибок отдельно (errors.log) ===
     error_handler = logging.FileHandler(os.path.join(log_dir, "errors.log"), encoding="utf-8")
     error_handler.setLevel(logging.ERROR)
     error_handler.setFormatter(formatter)
@@ -49,6 +56,7 @@ def log_call(func):
       - успешное выполнение
       - ошибки с трассировкой
     """
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         arg_str = ", ".join([repr(a) for a in args] +

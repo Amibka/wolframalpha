@@ -3,15 +3,15 @@ ui/history_window.py
 Окно истории вычислений
 """
 
+from datetime import datetime
+
 from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QColor, QAction
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QTableWidget, QTableWidgetItem, QLineEdit, QComboBox,
-    QFrame, QMessageBox, QHeaderView, QWidget, QMenu
+    QFrame, QMessageBox, QHeaderView, QMenu
 )
-from PyQt6.QtGui import QFont, QColor, QAction
-from datetime import datetime
-import json
 
 
 class HistoryWindow(QDialog):

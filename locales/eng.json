@@ -1,11 +1,11 @@
 {
   "app": {
-    "title": "🔬 WolframAlpha Calculator",
+    "title": "🔬 Mathly",
     "subtitle": "Solve equations, build graphs, and compute limits instantly",
-    "window_title": "WolframAlpha Calculator"
+    "window_title": "Mathly"
   },
   "header": {
-    "logo": "🧮 WolframAlpha",
+    "logo": "🧮 Mathly",
     "theme_tooltip": "Change theme",
     "language_tooltip": "Change language / Сменить язык"
   },

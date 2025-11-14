@@ -1,13 +1,11 @@
+import re
+
 import numpy as np
 import sympy
-import re
 from sympy import symbols, sympify, Eq, solve, nsolve, diff, simplify, Integral, Symbol, oo, limit
-from sympy.abc import (
-    a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
-)
 
 from logs.logger import log_call
-
+from utils.error_handler import math_error_handler
 
 # ============================================================================
 # ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ЧИСЛЕННОГО РЕШЕНИЯ
@@ -166,6 +164,7 @@ def _solve_numerically_extended(expr, var, precision=15):
 # ============================================================================
 
 @log_call
+@math_error_handler
 def solve_equation(equation: str, variable: str = None, local_dict=None, numeric_guesses=None, precision=15):
     """
     Решает алгебраическое уравнение
@@ -298,6 +297,7 @@ def solve_equation(equation: str, variable: str = None, local_dict=None, numeric
 # ============================================================================
 
 @log_call
+@math_error_handler
 def derivative(expression: str, local_dict=None):
     """
     Вычисляет производную по указанной переменной
@@ -347,6 +347,7 @@ def derivative(expression: str, local_dict=None):
 # ============================================================================
 
 @log_call
+@math_error_handler
 def calculation_residue(expression: str, variable: str = 'x', local_dict=None):
     """
     Вычисляет вычет функции в точке
@@ -377,6 +378,7 @@ def calculation_residue(expression: str, variable: str = 'x', local_dict=None):
 # ============================================================================
 
 @log_call
+@math_error_handler
 def integrate_func(integral_or_expr, local_dict=None):
     """
     Вычисляет интеграл
@@ -423,42 +425,49 @@ def integrate_func(integral_or_expr, local_dict=None):
 # ============================================================================
 
 @log_call
+@math_error_handler
 def simplify_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.simplify(expr)
 
 
 @log_call
+@math_error_handler
 def expand_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.expand(expr)
 
 
 @log_call
+@math_error_handler
 def factor_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.factor(expr)
 
 
 @log_call
+@math_error_handler
 def cancel_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.cancel(expr)
 
 
 @log_call
+@math_error_handler
 def together_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.together(expr)
 
 
 @log_call
+@math_error_handler
 def apart_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.apart(expr)
 
 
 @log_call
+@math_error_handler
 def collect_func(expression: str, local_dict=None):
     # Извлекаем переменную из "по <var>"
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
@@ -482,30 +491,35 @@ def collect_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def trigsimp_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.trigsimp(expr)
 
 
 @log_call
+@math_error_handler
 def powsimp_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.powsimp(expr)
 
 
 @log_call
+@math_error_handler
 def radsimp_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.radsimp(expr)
 
 
 @log_call
+@math_error_handler
 def ratsimp_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.ratsimp(expr)
 
 
 @log_call
+@math_error_handler
 def logcombine_func(expression: str, local_dict=None):
     """
     Объединяет логарифмы
@@ -518,30 +532,35 @@ def logcombine_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def nsimplify_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.nsimplify(expr)
 
 
 @log_call
+@math_error_handler
 def sqrtdenest_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.sqrtdenest(expr)
 
 
 @log_call
+@math_error_handler
 def factor_terms_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.factor_terms(expr)
 
 
 @log_call
+@math_error_handler
 def expand_complex_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.expand_complex(expr)
 
 
 @log_call
+@math_error_handler
 def separatevars_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.separatevars(expr)
@@ -552,6 +571,7 @@ def separatevars_func(expression: str, local_dict=None):
 # ============================================================================
 
 @log_call
+@math_error_handler
 def gcd_func(expression: str, local_dict=None):
     parts = [p.strip() for p in expression.split(',')]
     exprs = [sympify(p, locals=local_dict) for p in parts]
@@ -559,6 +579,7 @@ def gcd_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def lcm_func(expression: str, local_dict=None):
     parts = [p.strip() for p in expression.split(',')]
     exprs = [sympify(p, locals=local_dict) for p in parts]
@@ -566,6 +587,7 @@ def lcm_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def div_func(expression: str, local_dict=None):
     parts = [p.strip() for p in expression.split(',')]
     if len(parts) != 2:
@@ -576,6 +598,7 @@ def div_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def quo_func(expression: str, local_dict=None):
     parts = [p.strip() for p in expression.split(',')]
     if len(parts) != 2:
@@ -586,6 +609,7 @@ def quo_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def rem_func(expression: str, local_dict=None):
     parts = [p.strip() for p in expression.split(',')]
     if len(parts) != 2:
@@ -600,12 +624,14 @@ def rem_func(expression: str, local_dict=None):
 # ============================================================================
 
 @log_call
+@math_error_handler
 def poly_func(expression: str, local_dict=None):
     expr = sympify(expression, locals=local_dict)
     return sympy.Poly(expr)
 
 
 @log_call
+@math_error_handler
 def degree_func(expression: str, local_dict=None):
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
     if match:
@@ -627,6 +653,7 @@ def degree_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def content_func(expression: str, local_dict=None):
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
     if match:
@@ -642,6 +669,7 @@ def content_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def primitive_func(expression: str, local_dict=None):
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
     if match:
@@ -657,6 +685,7 @@ def primitive_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def LC_func(expression: str, local_dict=None):
     """Leading Coefficient - старший коэффициент"""
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
@@ -673,6 +702,7 @@ def LC_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def LM_func(expression: str, local_dict=None):
     """Leading Monomial - старший одночлен"""
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
@@ -689,6 +719,7 @@ def LM_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def LT_func(expression: str, local_dict=None):
     """Leading Term - старший член"""
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
@@ -705,6 +736,7 @@ def LT_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def sqf_list_func(expression: str, local_dict=None):
     """Квадратно-свободное разложение"""
     match = re.search(r'по\s+([a-zA-Zа-яА-Я])\b', expression)
@@ -721,6 +753,7 @@ def sqf_list_func(expression: str, local_dict=None):
 
 
 @log_call
+@math_error_handler
 def limit_func(expression: str, local_dict=None):
     """
     Вычисляет предел функции

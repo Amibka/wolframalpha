@@ -1,5 +1,8 @@
 import json
+import os
 import re
+import sys
+
 import sympy
 from sympy import symbols, Integral, Limit, sympify
 
@@ -11,11 +14,21 @@ from core.sympy_solver import (
     expand_complex_func, factor_terms_func, sqrtdenest_func, nsimplify_func,
     logcombine_func, ratsimp_func, radsimp_func, powsimp_func, trigsimp_func,
     collect_func, apart_func, together_func, cancel_func, factor_func,
-    expand_func, simplify_func, primitive_func, content_func, integrate_func,
-    limit_func
+    expand_func, simplify_func, primitive_func, content_func, integrate_func
 )
 from logs.logger import log_call
+from utils.error_handler import math_error_handler
 from utils.suggest_correction import suggest_correction, suggest_correction_ru
+
+
+def resource_path(relative_path):
+    """Получить абсолютный путь к ресурсу, работает для dev и PyInstaller"""
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 
 # Все переменные
 a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z = symbols(
@@ -37,7 +50,7 @@ class MathParser:
             '∑': 'Sum',
             '∏': 'Product',
             '√': 'sqrt',
-            '∛': 'cbrt',
+            '∛': 'root3',
             '∜': 'root4',
             '±': '+-',
             '×': '*',
@@ -84,6 +97,7 @@ class MathParser:
         return {k: v for k, v in local.items() if v is not None}
 
     @log_call
+    @math_error_handler
     def replace_math_symbols(self, expr: str) -> str:
         """Заменяет математические символы на текстовые эквиваленты"""
         if not expr:
@@ -106,6 +120,7 @@ class MathParser:
         return expr
 
     @log_call
+    @math_error_handler
     def balance_parentheses(self, expr: str) -> str:
         """Балансирует скобки"""
         if not expr:
@@ -127,6 +142,7 @@ class MathParser:
         return expr
 
     @log_call
+    @math_error_handler
     def insert_multiplication(self, expr: str) -> str:
         """Вставляет знак умножения где нужно"""
         if not expr:
@@ -140,6 +156,7 @@ class MathParser:
 
         # xy -> x*y (но не sin, cos, Limit и т.д.)
         # НЕ применяем внутри Integral(...), так как уже обработано
+        @math_error_handler
         def repl_var(match):
             first = match.group(1)
             second = match.group(2)
@@ -178,6 +195,7 @@ class MathParser:
         return expr
 
     @log_call
+    @math_error_handler
     def replace_custom_log(self, expr: str) -> str:
         """
         Преобразует logBASE(expr) -> log(expr, BASE)
@@ -238,6 +256,7 @@ class MathParser:
         return ''.join(out)
 
     @log_call
+    @math_error_handler
     def replace_roots(self, expr: str) -> str:
         """
         Преобразует корни n-й степени в root(x, n)
@@ -253,6 +272,7 @@ class MathParser:
             return ""
 
         # 1. Обрабатываем root(n, x) -> root(x, n)
+        @math_error_handler
         def fix_root_args(m):
             arg1 = m.group(1).strip()
             arg2 = m.group(2).strip()
@@ -266,6 +286,7 @@ class MathParser:
         expr = re.sub(r'root\((\d+),\s*([^)]+)\)', fix_root_args, expr)
 
         # 2. Обрабатываем rootN(x) -> root(x, N)
+        @math_error_handler
         def replace_rootn(m):
             n = m.group(1)
             x = m.group(2)
@@ -276,6 +297,7 @@ class MathParser:
         expr = re.sub(r'root(\d+)\(([^)]+)\)', replace_rootn, expr)
 
         # 3. Обрабатываем cbrt(x) -> root(x, 3)
+        @math_error_handler
         def replace_cbrt(m):
             x = m.group(1)
             result = f'root({x}, 3)'
@@ -287,6 +309,7 @@ class MathParser:
         return expr
 
     @log_call
+    @math_error_handler
     def replace_limits(self, expr: str) -> str:
         """
         Преобразует текстовые пределы в Limit(...)
@@ -321,6 +344,7 @@ class MathParser:
             (r'(.+)\s+as\s+([a-zA-Z])\s*->\s*([^\s()]+)', 'as'),
         ]
 
+        @math_error_handler
         def repl_direct_paren(m):
             """x->3 (expr)"""
             var = m.group(1)
@@ -337,6 +361,7 @@ class MathParser:
             print(f"🔄 Преобразование: {m.group(0)} -> {result}")
             return result
 
+        @math_error_handler
         def repl_direct(m):
             """x->3 expr"""
             var = m.group(1)
@@ -353,6 +378,7 @@ class MathParser:
             print(f"🔄 Преобразование: {m.group(0)} -> {result}")
             return result
 
+        @math_error_handler
         def repl_arrow_paren(m):
             """lim x->3 (expr)"""
             var = m.group(1)
@@ -368,6 +394,7 @@ class MathParser:
             print(f"🔄 Преобразование: {m.group(0)} -> {result}")
             return result
 
+        @math_error_handler
         def repl_arrow(m):
             """lim x->3 expr"""
             var = m.group(1)
@@ -383,6 +410,7 @@ class MathParser:
             print(f"🔄 Преобразование: {m.group(0)} -> {result}")
             return result
 
+        @math_error_handler
         def repl_pri(m):
             """expr при x->3"""
             inner = normalize_pow(m.group(1).strip())
@@ -426,6 +454,7 @@ class MathParser:
         return expr
 
     @log_call
+    @math_error_handler
     def replace_integrals(self, expr: str) -> str:
         """
         Преобразует текстовые интегралы в Integral(...)
@@ -481,6 +510,7 @@ class MathParser:
             (r'(.+?)\s+по\s+([a-zA-Z])\b', 'po'),
         ]
 
+        @math_error_handler
         def repl_dx(m):
             inner = m.group(1).strip()
             var = m.group(2)
@@ -521,6 +551,7 @@ class MathParser:
             expr_part = add_multiplication_to_inner(expr_part)
             return f'Integral({expr_part}, {var})'
 
+        @math_error_handler
         def repl_from_to(m):
             expr_part = normalize_pow(m.group(1).strip())
             expr_part = add_multiplication_to_inner(expr_part)
@@ -528,6 +559,7 @@ class MathParser:
             var = self._detect_variable(expr_part)
             return f'Integral({expr_part}, ({var}, {a}, {b}))'
 
+        @math_error_handler
         def repl_handler(m, mode):
             if mode == 'dx' or mode == 'po':
                 return repl_dx(m)
@@ -560,6 +592,7 @@ class MathParser:
 
         return expr
 
+    @math_error_handler
     def _detect_variable(self, expr: str) -> str:
         """Автоопределение переменной в выражении"""
         var_pattern = r'(?<![a-zA-Z])([a-zA-Z])(?![a-zA-Z])'
@@ -577,6 +610,7 @@ class MathParser:
         return 'x'
 
     @log_call
+    @math_error_handler
     def parse(self, expr: str) -> tuple:
         """
         Главная функция парсинга
@@ -623,6 +657,7 @@ class IntegralComputer:
 
     @staticmethod
     @log_call
+    @math_error_handler
     def compute_all_integrals(parsed_str: str, local_dict: dict):
         """
         Находит все Integral(...) в выражении и вычисляет их
@@ -635,7 +670,8 @@ class IntegralComputer:
         try:
             expr = sympify(parsed_str, locals=local_dict)
         except Exception as e:
-            return None, f"Ошибка sympify: {e}\nВыражение: {parsed_str}"
+            # Пробрасываем исключение дальше, декоратор его поймает
+            raise
 
         # Вычисляем интегралы итеративно (для обработки вложенных)
         try:
@@ -675,6 +711,7 @@ class LimitComputer:
 
     @staticmethod
     @log_call
+    @math_error_handler
     def compute_all_limits(parsed_str: str, local_dict: dict):
         """
         Находит все Limit(...) в выражении и вычисляет их
@@ -740,10 +777,13 @@ class CommandRouter:
         self.integral_computer = IntegralComputer()
         self.limit_computer = LimitComputer()
 
-        with open("language/commands_translate.json", "r", encoding="utf-8") as f:
+        # ИСПРАВЛЕНО: используем resource_path вместо прямого пути
+        commands_file = resource_path("language/commands_translate.json")
+        with open(commands_file, "r", encoding="utf-8") as f:
             self.command_translate = json.load(f)
 
     @log_call
+    @math_error_handler
     def extract_command(self, user_input: str) -> tuple:
         """
         Извлекает команду и выражение из ввода
@@ -781,6 +821,7 @@ class CommandRouter:
         return "solve", user_input
 
     @log_call
+    @math_error_handler
     def extract_variable(self, expression: str, keywords=None, auto_detect=True):
         """
         Извлекает переменную из выражения
@@ -822,6 +863,7 @@ class CommandRouter:
         return None, expression, None
 
     @log_call
+    @math_error_handler
     def process_command(self, command: str, expression: str):
         """Обрабатывает команду"""
 
@@ -884,6 +926,7 @@ class CommandRouter:
 
         return f"Неизвестная команда: {command}"
 
+    @math_error_handler
     def _solve(self, expression: str):
         """Решение уравнений с обработкой интегралов и пределов"""
         variable, clean_expr, error = self.extract_variable(expression, auto_detect=True)
@@ -892,7 +935,9 @@ class CommandRouter:
 
         # КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Обрабатываем уравнения с '='
         # Преобразуем "expr1 = expr2" в "expr1 - (expr2)"
-        if '=' in clean_expr:
+        has_equation = '=' in clean_expr
+
+        if has_equation:
             parts = clean_expr.split('=')
             if len(parts) == 2:
                 left = parts[0].strip()
@@ -921,20 +966,54 @@ class CommandRouter:
         if err:
             return err
 
-        # КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ:
+        # КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ #1:
         # Если в исходном выражении были только интегралы/пределы (без знака =),
         # возвращаем вычисленный результат, а не решаем уравнение
-        if (has_integrals or has_limits) and '=' not in expression:
+        if (has_integrals or has_limits) and not has_equation:
             print(f"📝 Результат вычисления: {expr_computed}")
             return expr_computed
+
+        # КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ #2:
+        # Если выражение НЕ содержит переменных И НЕ является уравнением,
+        # просто возвращаем вычисленное значение (например, cbrt(27) -> 3)
+        try:
+            # Проверяем наличие переменных
+            from sympy import symbols
+            expr_sympy = sympify(str(expr_computed), locals=local_dict)
+            free_vars = expr_sympy.free_symbols
+
+            # Если нет переменных и нет знака =, это просто вычисление
+            if not free_vars and not has_equation:
+                print(f"📝 Простое вычисление (без переменных): {expr_computed}")
+                return expr_computed
+        except:
+            pass
+
+        # КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ #3:
+        # Если не было знака = в исходном выражении и есть переменные,
+        # это может быть выражение для упрощения, а не уравнение
+        if not has_equation:
+            # Проверяем, может ли это быть уравнением (содержит переменную)
+            if variable is None:
+                # Нет переменной -> возвращаем упрощенное выражение
+                print(f"📝 Упрощённое выражение: {expr_computed}")
+                return expr_computed
 
         # Иначе решаем уравнение
         final_str = str(expr_computed)
         print(f"📝 Выражение после вычислений: {final_str}")
         print(f"📝 Переменная: {variable}")
 
-        return solve_equation(final_str, variable, local_dict=local_dict)
+        result = solve_equation(final_str, variable, local_dict=local_dict)
 
+        # ИСПРАВЛЕНИЕ #4: Если solve_equation вернул пустой список для константы,
+        # возвращаем саму константу
+        if result == [] and not has_equation:
+            return expr_computed
+
+        return result
+
+    @math_error_handler
     def _derivative(self, expression: str):
         """Производная"""
         variable, clean_expr, error = self.extract_variable(expression, ['по', 'at', 'by', 'in'])
@@ -950,11 +1029,13 @@ class CommandRouter:
 
         return derivative(expr_with_var, local_dict=local_dict)
 
+    @math_error_handler
     def _residue(self, expression: str):
         """Вычет"""
         parsed_expr, local_dict = self.parser.parse(expression)
         return calculation_residue(parsed_expr, local_dict=local_dict)
 
+    @math_error_handler
     def _integrate(self, expression: str):
         """Интегрирование"""
         parsed_expr, local_dict = self.parser.parse(expression)
@@ -965,6 +1046,7 @@ class CommandRouter:
 
         return expr_computed
 
+    @math_error_handler
     def _limit(self, expression: str):
         """Вычисление предела"""
         parsed_expr, local_dict = self.parser.parse(expression)
@@ -975,11 +1057,13 @@ class CommandRouter:
 
         return expr_computed
 
+    @math_error_handler
     def _simple_func(self, expression: str, func):
         """Простые функции без переменных"""
         parsed_expr, local_dict = self.parser.parse(expression)
         return func(parsed_expr, local_dict=local_dict)
 
+    @math_error_handler
     def _collect(self, expression: str):
         """Группировка"""
         variable, clean_expr, error = self.extract_variable(expression, ['по', 'at', 'by', 'in'])
@@ -995,6 +1079,7 @@ class CommandRouter:
 
         return collect_func(expr_with_var, local_dict=local_dict)
 
+    @math_error_handler
     def _degree(self, expression: str):
         """Степень многочлена"""
         variable, clean_expr, error = self.extract_variable(expression, ['по', 'at', 'by', 'in'])
@@ -1010,6 +1095,7 @@ class CommandRouter:
 
         return degree_func(expr_with_var, local_dict=local_dict)
 
+    @math_error_handler
     def _gcd(self, expression: str):
         """НОД"""
         if ',' not in expression:
@@ -1025,6 +1111,7 @@ class CommandRouter:
         combined = ', '.join(parsed_parts)
         return gcd_func(combined, local_dict=local_dict)
 
+    @math_error_handler
     def _lcm(self, expression: str):
         """НОК"""
         if ',' not in expression:
@@ -1040,6 +1127,7 @@ class CommandRouter:
         combined = ', '.join(parsed_parts)
         return lcm_func(combined, local_dict=local_dict)
 
+    @math_error_handler
     def _div(self, expression: str):
         """Деление многочленов"""
         if ',' not in expression:
@@ -1052,6 +1140,7 @@ class CommandRouter:
         combined = f"{parsed1}, {parsed2}"
         return div_func(combined, local_dict=local_dict)
 
+    @math_error_handler
     def _quo(self, expression: str):
         """Частное"""
         if ',' not in expression:
@@ -1064,6 +1153,7 @@ class CommandRouter:
         combined = f"{parsed1}, {parsed2}"
         return quo_func(combined, local_dict=local_dict)
 
+    @math_error_handler
     def _rem(self, expression: str):
         """Остаток"""
         if ',' not in expression:
@@ -1076,11 +1166,13 @@ class CommandRouter:
         combined = f"{parsed1}, {parsed2}"
         return rem_func(combined, local_dict=local_dict)
 
+    @math_error_handler
     def _poly(self, expression: str):
         """Многочлен"""
         parsed_expr, local_dict = self.parser.parse(expression)
         return poly_func(parsed_expr, local_dict=local_dict)
 
+    @math_error_handler
     def _content(self, expression: str):
         """Содержимое"""
         variable, clean_expr, error = self.extract_variable(expression, ['по', 'at', 'by', 'in'])
@@ -1096,6 +1188,7 @@ class CommandRouter:
 
         return content_func(expr_with_var, local_dict=local_dict)
 
+    @math_error_handler
     def _primitive(self, expression: str):
         """Примитивная часть"""
         variable, clean_expr, error = self.extract_variable(expression, ['по', 'at', 'by', 'in'])
@@ -1115,6 +1208,7 @@ class CommandRouter:
     Добавьте/замените метод _plot в вашем core/router.py (класс CommandRouter)
     """
 
+    @math_error_handler
     def _plot(self, expression: str):
         """
         Построение графика функции
@@ -1296,6 +1390,7 @@ class CommandRouter:
                 'message': f'Ошибка: {str(e)}\n\n{traceback.format_exc()}'
             }
 
+    @math_error_handler
     def _detect_variables_for_plot(self, expr_str: str, expected=None):
         """
         Автоопределение переменных в выражении
@@ -1342,6 +1437,7 @@ class CommandRouter:
 
 # Главная функция для внешнего API
 @log_call
+@math_error_handler
 def get_text(user_input: str):
     """
     Главная точка входа для обработки пользовательского ввода
@@ -1364,6 +1460,7 @@ def get_text(user_input: str):
     return router.process_command(command, expression)
 
 
+@math_error_handler
 def smart_display_implicit_2d(result):
     """Отображение неявной 2D кривой F(x,y) = 0"""
     import numpy as np

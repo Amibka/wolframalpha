@@ -1,11 +1,11 @@
 {
   "app": {
-    "title": "🔬 WolframAlpha Calculator",
+    "title": "🔬 Mathly",
     "subtitle": "Решайте сложные уравнения и стройте графики мгновенно",
-    "window_title": "WolframAlpha Calculator"
+    "window_title": "Mathly"
   },
   "header": {
-    "logo": "🧮 WolframAlpha",
+    "logo": "🧮 Mathly",
     "theme_tooltip": "Сменить тему",
     "language_tooltip": "Сменить язык / Change language"
   },

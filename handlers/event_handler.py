@@ -5,9 +5,11 @@ handlers/event_handler.py - ИСПРАВЛЕННАЯ ВЕРСИЯ
 
 from logs.logger import log_call
 from core.parser import get_text
+from utils.error_handler import math_error_handler
 
 
 @log_call
+@math_error_handler
 def on_enter_pressed(input_field, output_widget):
     """
     Обрабатывает нажатие Enter в поле ввода
