@@ -970,7 +970,7 @@ class CommandRouter:
         # Если в исходном выражении были только интегралы/пределы (без знака =),
         # возвращаем вычисленный результат, а не решаем уравнение
         if (has_integrals or has_limits) and not has_equation:
-            print(f"📝 Результат вычисления: {expr_computed}")
+            print(f"Результат вычисления: {expr_computed}")
             return expr_computed
 
         # КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ #2:
@@ -984,7 +984,7 @@ class CommandRouter:
 
             # Если нет переменных и нет знака =, это просто вычисление
             if not free_vars and not has_equation:
-                print(f"📝 Простое вычисление (без переменных): {expr_computed}")
+                print(f"Простое вычисление (без переменных): {expr_computed}")
                 return expr_computed
         except:
             pass
@@ -996,13 +996,13 @@ class CommandRouter:
             # Проверяем, может ли это быть уравнением (содержит переменную)
             if variable is None:
                 # Нет переменной -> возвращаем упрощенное выражение
-                print(f"📝 Упрощённое выражение: {expr_computed}")
+                print(f"Упрощённое выражение: {expr_computed}")
                 return expr_computed
 
         # Иначе решаем уравнение
         final_str = str(expr_computed)
-        print(f"📝 Выражение после вычислений: {final_str}")
-        print(f"📝 Переменная: {variable}")
+        print(f"Выражение после вычислений: {final_str}")
+        print(f"Переменная: {variable}")
 
         result = solve_equation(final_str, variable, local_dict=local_dict)
 
@@ -1234,7 +1234,7 @@ class CommandRouter:
                 is_implicit = False
                 variables = [match_3d_func.group(1), match_3d_func.group(2)]
                 func_expr = match_3d_func.group(3).strip()
-                print(f"✅ 3D явная функция: f({variables[0]},{variables[1]}) = {func_expr}")
+                print(f"3D явная функция: f({variables[0]},{variables[1]}) = {func_expr}")
 
             # 2. f(x) = expr  (2D функция)
             elif re.match(r'^[fgh]\s*\(\s*([a-zA-Z])\s*\)\s*=\s*(.+)$', expr, re.I):
@@ -1243,7 +1243,7 @@ class CommandRouter:
                 is_implicit = False
                 variables = [match.group(1)]
                 func_expr = match.group(2).strip()
-                print(f"✅ 2D явная функция: f({variables[0]}) = {func_expr}")
+                print(f"2D явная функция: f({variables[0]}) = {func_expr}")
 
             # 3. y = expr  (2D явная функция)
             elif re.match(r'^y\s*=\s*(.+)$', expr, re.I):
@@ -1258,7 +1258,7 @@ class CommandRouter:
                 # Если в выражении 2+ переменных - это 3D!
                 if len(detected) >= 2:
                     # y = f(x,z) интерпретируем как z = f(x,y)
-                    print(f"⚠️ ВНИМАНИЕ: y = {func_expr} содержит переменные {detected}")
+                    print(f"ВНИМАНИЕ: y = {func_expr} содержит переменные {detected}")
                     print(f"   Для 3D графика используйте: z = {func_expr}")
                     return {
                         'type': 'error',
@@ -1268,7 +1268,7 @@ class CommandRouter:
                     }
 
                 variables = detected if detected else ['x']
-                print(f"✅ 2D явная функция: y = {func_expr}, переменная: {variables}")
+                print(f"2D явная функция: y = {func_expr}, переменная: {variables}")
 
             # 4. z = expr  (3D явная функция)
             elif re.match(r'^z\s*=\s*(.+)$', expr, re.I):
@@ -1280,11 +1280,11 @@ class CommandRouter:
                 if len(detected) >= 2:
                     is_3d = True
                     variables = detected[:2]
-                    print(f"✅ 3D явная функция: z = {func_expr}, переменные: {variables}")
+                    print(f"3D явная функция: z = {func_expr}, переменные: {variables}")
                 elif len(detected) == 1:
                     is_3d = False
                     variables = detected
-                    print(f"✅ 2D явная функция: z = {func_expr}, переменная: {variables}")
+                    print(f"2D явная функция: z = {func_expr}, переменная: {variables}")
                 else:
                     return {
                         'type': 'error',
@@ -1312,14 +1312,14 @@ class CommandRouter:
                         is_3d = False
                         is_implicit = True
                         variables = detected[:2]
-                        print(f"✅ 2D неявная кривая: {expr} → F({variables[0]},{variables[1]}) = 0")
+                        print(f"2D неявная кривая: {expr} → F({variables[0]},{variables[1]}) = 0")
 
                     elif len(detected) == 3:
                         # Три переменные → 3D неявная поверхность
                         is_3d = True
                         is_implicit = True
                         variables = detected[:3]
-                        print(f"✅ 3D неявная поверхность: {expr} → F({','.join(variables)}) = 0")
+                        print(f"3D неявная поверхность: {expr} → F({','.join(variables)}) = 0")
 
                     elif len(detected) == 1:
                         # Одна переменная → ошибка, это не кривая
@@ -1345,12 +1345,12 @@ class CommandRouter:
                     is_3d = True
                     is_implicit = False
                     variables = detected[:2]
-                    print(f"✅ 3D явная функция (без z=): {func_expr}, переменные: {variables}")
+                    print(f"3D явная функция (без z=): {func_expr}, переменные: {variables}")
                 elif len(detected) == 1:
                     is_3d = False
                     is_implicit = False
                     variables = detected
-                    print(f"✅ 2D явная функция (без y=): {func_expr}, переменная: {variables}")
+                    print(f"2D явная функция (без y=): {func_expr}, переменная: {variables}")
                 else:
                     return {
                         'type': 'error',
@@ -1373,7 +1373,7 @@ class CommandRouter:
             else:
                 plot_type = 'plot_2d_implicit' if is_implicit else 'plot_2d'
 
-            print(f"📊 Финальный результат: type={plot_type}, expr={parsed_expr}, vars={variables}")
+            print(f"Финальный результат: type={plot_type}, expr={parsed_expr}, vars={variables}")
 
             return {
                 'type': plot_type,

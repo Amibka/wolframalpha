@@ -36,7 +36,7 @@ def on_enter_pressed(input_field, output_widget):
         print(f"DEBUG: Тип результата: {type(result)}")
 
         # Отображаем результат в виджете
-        print(f"🔍 DEBUG: Вызываем display_result с результатом: {result}")
+        print(f"DEBUG: Вызываем display_result с результатом: {result}")
         output_widget.display_result(result)
         print("DEBUG: Результат успешно отображен")
 
@@ -45,7 +45,7 @@ def on_enter_pressed(input_field, output_widget):
 
     except Exception as e:
         import traceback
-        error_message = f"❌ Ошибка обработки:\n{str(e)}\n\n{traceback.format_exc()}"
+        error_message = f"Ошибка обработки:\n{str(e)}\n\n{traceback.format_exc()}"
         print(f"DEBUG: Произошла ошибка: {error_message}")
         output_widget.setPlainText(error_message)
 

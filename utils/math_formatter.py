@@ -101,7 +101,7 @@ def format_solutions(result):
             return '\n'.join(lines)
 
     except Exception as e:
-        print(f"❌ Ошибка форматирования: {e}")
+        print(f"Ошибка форматирования: {e}")
         import traceback
         traceback.print_exc()
         return str(result)
